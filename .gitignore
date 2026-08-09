@@ -1,0 +1,6 @@
+paper_text.txt
+.venv
+.env
+**/__pycache__
+cache
+figs
