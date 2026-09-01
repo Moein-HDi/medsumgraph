@@ -1,0 +1,186 @@
+{
+  "n": 20,
+  "accuracy": 0.1,
+  "results": [
+    {
+      "question": "A junior orthopaedic surgery resident is completing a carpal tunnel repair with the department chairman as the attending physician. During the case, the resident inadvertently cuts a flexor tendon. The tendon is repaired without complication. The attending tells the resident that the patient will do fine, and there is no need to report this minor complication that will not harm the patient, as he does not want to make the patient worry unnecessarily. He tells the resident to leave this complication out of the operative report. Which of the following is the correct next action for the resident to take?",
+      "gold": "B",
+      "votes": [
+        "A"
+      ],
+      "predicted": "A",
+      "context": "No relevant knowledge graph facts found."
+    },
+    {
+      "question": "A 67-year-old man with transitional cell carcinoma of the bladder comes to the physician because of a 2-day history of ringing sensation in his ear. He received this first course of neoadjuvant chemotherapy 1 week ago. Pure tone audiometry shows a sensorineural hearing loss of 45 dB. The expected beneficial effect of the drug that caused this patient's symptoms is most likely due to which of the following actions?",
+      "gold": "D",
+      "votes": [
+        "A"
+      ],
+      "predicted": "A",
+      "context": "- (sensorineural hearing loss, causes, ototoxic drugs)\n- (sensorineural hearing loss, symptoms, tinnitus)\n- (sensorineural hearing loss, treated_with, prednisone)\n- (sensorineural hearing loss, defined_as, damage to the inner ear, sensory organ, or the vestibulocochlear nerve)\n- (sensorineural hearing loss, causes, infection)\n- (sensorineural hearing loss, causes, noise-induced hearing loss)\n- (sensorineural hearing loss, symptoms, difficulty understanding on the telephone)\n- (sensorineural hearing loss, causes, damage to cochlear hair cells)\n- (sensorineural hearing loss, causes, prolonged exposure to environmental noise)\n- (sensorineural hearing loss, risk_factor, prolonged exposure to environmental noise)\n- (sensorineural hearing loss, risk_factor, age)\n- (sensorineural hearing loss, symptoms, difficulty understanding speech)\n- (sensorineural hearing loss, risk_factor, genetic mutations)\n- (sensorineural hearing loss, symptoms, vertigo)\n- (sensorineural hearing loss, risk_factor, being in loud environments regularly)\n- (sensorineural hearing loss, symptoms, loss of acuity in distinguishing foreground voices)\n- (sensorineural hearing loss, causes, genetic mutations)\n- (lung cancer, treated_with, chemotherapy)\n- (sensorineural hearing loss, risk_factor, using headphones at high volume)\n- (sensorineural hearing loss, symptoms, perception that people mumble when speaking)"
+    },
+    {
+      "question": "Two weeks after undergoing an emergency cardiac catherization with stenting for unstable angina pectoris, a 61-year-old man has decreased urinary output and malaise. He has type 2 diabetes mellitus and osteoarthritis of the hips. Prior to admission, his medications were insulin and naproxen. He was also started on aspirin, clopidogrel, and metoprolol after the coronary intervention. His temperature is 38°C (100.4°F), pulse is 93/min, and blood pressure is 125/85 mm Hg. Examination shows mottled, reticulated purplish discoloration of the feet. Laboratory studies show:\nHemoglobin count 14 g/dL\nLeukocyte count 16,400/mm3\nSegmented neutrophils 56%\nEosinophils 11%\nLymphocytes 31%\nMonocytes 2%\nPlatelet count 260,000/mm3\nErythrocyte sedimentation rate 68 mm/h\nSerum\nUrea nitrogen 25 mg/dL\nCreatinine 4.2 mg/dL\nRenal biopsy shows intravascular spindle-shaped vacuoles. Which of the following is the most likely cause of this patient's symptoms?\"",
+      "gold": "B",
+      "votes": [
+        "A"
+      ],
+      "predicted": "A",
+      "context": "- (angina, treated_with, metoprolol)\n- (metoprolol, treated_with, angina)\n- (aspirin, treated_with, pericarditis)\n- (myocardial infarction, treated_with, metoprolol)\n- (metoprolol, treated_with, myocardial infarction)\n- (aspirin, prevents, blood clots)\n- (hypertension, treated_with, metoprolol)\n- (cardiac arrhythmias, treated_with, metoprolol)\n- (metoprolol, treated_with, hypertension)\n- (metoprolol, treated_with, cardiac arrhythmias)\n- (metoprolol, diagnosed_by, none)\n- (type 2 diabetes, complication, amputations)\n- (type 2 diabetes, treated_with, semaglutide)\n- (type 2 diabetes, complication, poor blood flow in the lower limbs)\n- (aspirin, treated_with, rheumatic fever)\n- (type 2 diabetes, symptoms, slow-healing sores)\n- (unstable angina, treated_with, heparin)\n- (naproxen, treated_with, fever)\n- (naproxen, causes, heart disease)\n- (type 2 diabetes, treated_with, tirzepatide)"
+    },
+    {
+      "question": "A 39-year-old woman is brought to the emergency department because of fevers, chills, and left lower quadrant pain. Her temperature is 39.1°C (102.3°F), pulse is 126/min, respirations are 28/min, and blood pressure is 80/50 mm Hg. There is blood oozing around the site of a peripheral intravenous line. Pelvic examination shows mucopurulent discharge from the cervical os and left adnexal tenderness. Laboratory studies show:\nPlatelet count 14,200/mm3\nFibrinogen 83 mg/mL (N = 200–430 mg/dL)\nD-dimer 965 ng/mL (N < 500 ng/mL)\nWhen phenol is applied to a sample of the patient's blood at 90°C, a phosphorylated N-acetylglucosamine dimer with 6 fatty acids attached to a polysaccharide side chain is identified. A blood culture is most likely to show which of the following?\"",
+      "gold": "D",
+      "votes": [
+        "D"
+      ],
+      "predicted": "D",
+      "context": "- (fever, defined_as, abnormal elevation of body temperature)\n- (fever, symptoms, feeling of heat)\n- (fever, symptoms, feeling of cold or chills)\n- (paracetamol, used_for, fever)\n- (fever, treated_with, paracetamol)\n- (ibuprofen, used_for, fever)\n- (fever, symptoms, increased heat production)\n- (fever, causes, deep vein thrombosis)\n- (fever, symptoms, flushing)\n- (fever, treated_with, ibuprofen)\n- (fever, symptoms, efforts to conserve heat)\n- (fever, symptoms, sweating)\n- (naproxen, treated_with, fever)\n- (fever, risk_factor, seizure)\n- (fever, causes, bacterial infections)\n- (fever, causes, viral infections)\n- (cholangitis, symptoms, fever)\n- (seizure, causes, fever)\n- (ascending cholangitis, symptoms, fever)\n- (fever, causes, vasculitis)"
+    },
+    {
+      "question": "A 35-year-old man comes to the physician because of itchy, watery eyes for the past week. He has also been sneezing multiple times a day during this period. He had a similar episode 1 year ago around springtime. He has iron deficiency anemia and ankylosing spondylitis. Current medications include ferrous sulfate, artificial tear drops, and indomethacin. He works as an elementary school teacher. His vital signs are within normal limits. Visual acuity is 20/20 without correction. Physical examination shows bilateral conjunctival injection with watery discharge. The pupils are 3 mm, equal, and reactive to light. Examination of the anterior chamber of the eye is unremarkable. Which of the following is the most appropriate treatment?",
+      "gold": "B",
+      "votes": [
+        "A"
+      ],
+      "predicted": "A",
+      "context": "- (allergic rhinitis, symptoms, watery eyes)\n- (allergic rhinitis, symptoms, itchy eyes)\n- (allergic rhinitis, symptoms, sneezing)"
+    },
+    {
+      "question": "A 39-year-old man presents to the emergency department because of progressively worsening chest pain and nausea that started at a local bar 30 minutes prior. The pain radiates to the epigastric area. He has a 5-year history of untreated hypertension. He has smoked 1 pack of cigarettes daily for the past 5 years and started abusing cocaine 2 weeks before his emergency room visit. The patient is diaphoretic and in marked distress. What should be the first step in management?",
+      "gold": "D",
+      "votes": [
+        "A"
+      ],
+      "predicted": "A",
+      "context": "- (hypertension, complication, heart failure)\n- (medications, treated_with, hypertension)\n- (nausea, symptoms, discomfort on the chest)\n- (hypertension, complication, coronary artery disease)\n- (hypertension, complication, stroke)\n- (hydrochlorothiazide, treated_with, hypertension)\n- (ambulatory blood pressure monitoring, diagnosed_by, hypertension)\n- (physical exercise, treated_with, hypertension)\n- (chest pain, symptom, lung cancer)\n- (dyspnea, symptoms, chest pain)\n- (hypertension, treated_with, metoprolol)\n- (nausea, causes, intense pain)\n- (epistaxis, symptoms, nausea)\n- (hypertension, symptoms, none)\n- (metoprolol, treated_with, hypertension)\n- (hypertension, complication, chronic kidney disease)\n- (weight loss, treated_with, hypertension)\n- (midodrine, has_side_effect, hypertension)\n- (hypertension, complication, atrial fibrillation)\n- (morphine, causes, nausea)"
+    },
+    {
+      "question": "A 68-year-old male comes to the physician for evaluation of right flank pain. He has a history of diabetes and peripheral artery disease. His blood pressure is 160/90 mm Hg. Physical examination shows abdominal tenderness and right flank tenderness. An ultrasound shows dilation of the right ureter and renal pelvis. Which of the following is the most likely underlying cause of this patient's condition?",
+      "gold": "C",
+      "votes": [
+        "A"
+      ],
+      "predicted": "A",
+      "context": "- (hypertension, complication, peripheral arterial disease)\n- (hypertension, complication, chronic kidney disease)\n- (midodrine, has_side_effect, hypertension)\n- (hypertension, symptoms, none)\n- (hypertension, causes, chronic kidney disease)\n- (blood pressure measurement, diagnosed_by, hypertension)\n- (hypertension, complication, stroke)\n- (gout, symptoms, tenderness)\n- (ambulatory blood pressure monitoring, diagnosed_by, hypertension)\n- (dull achy pain, symptoms, tenderness)\n- (hypertension, complication, coronary artery disease)\n- (midodrine, causes, hypertension)\n- (hypertension, complication, heart failure)\n- (physical exercise, treated_with, hypertension)\n- (gout, symptoms, pain)\n- (hypertension, complication, atrial fibrillation)\n- (hypertension, complication, vision loss)\n- (hypertension, causes, endocrine disorder)\n- (weight loss, treated_with, hypertension)\n- (hypertension, complication, dementia)"
+    },
+    {
+      "question": "A 65-year-old man is brought to the emergency department 30 minutes after the onset of acute chest pain. He has hypertension and asthma. Current medications include atorvastatin, lisinopril, and an albuterol inhaler. He appears pale and diaphoretic. His pulse is 114/min and blood pressure is 130/88 mm Hg. An ECG shows ST-segment depressions in leads II, III, and aVF. Laboratory studies show an increased serum troponin T concentration. The patient is treated for acute coronary syndrome and undergoes percutaneous transluminal coronary angioplasty. At the time of discharge, echocardiography shows a left ventricular ejection fraction of 58%. In addition to aspirin, which of the following drugs should be added to this patient's medication regimen?",
+      "gold": "C",
+      "votes": [
+        "A"
+      ],
+      "predicted": "A",
+      "context": "- (aspirin, prevents, heart attack)\n- (aspirin, treated_with, pericarditis)\n- (cardiovascular disease, treated_with, atorvastatin)\n- (medications, treated_with, hypertension)\n- (aspirin, exacerbates, asthma)\n- (atorvastatin, treats, cardiovascular disease)\n- (abnormal lipid levels, treated_with, atorvastatin)\n- (atorvastatin, causes, heartburn)\n- (aspirin, treated_with, rheumatic fever)\n- (aspirin, causes, stomach bleeding)\n- (aspirin, prevents, ischaemic stroke)\n- (atorvastatin, diagnosed_by, none)\n- (aspirin, causes, upset stomach)\n- (atorvastatin, symptoms, heartburn)\n- (atorvastatin, treats, abnormal lipid levels)\n- (aspirin, prevents, blood clots)\n- (aspirin, complication, reye syndrome)\n- (atorvastatin, causes, muscle pain)\n- (atorvastatin, definition, statin medication)\n- (hypertension, treated_with, metoprolol)"
+    },
+    {
+      "question": "A 37-year-old-woman presents to her primary care physician requesting a new form of birth control. She has been utilizing oral contraceptive pills (OCPs) for the past 8 years, but asks to switch to an intrauterine device (IUD). Her vital signs are: blood pressure 118/78 mm Hg, pulse 73/min and respiratory rate 16/min. She is afebrile. Physical examination is within normal limits. Which of the following past medical history statements would make copper IUD placement contraindicated in this patient?",
+      "gold": "B",
+      "votes": [
+        "A"
+      ],
+      "predicted": "A",
+      "context": "- (heavy menstrual bleeding, treated_with, hormonal intrauterine device)\n- (heavy menstrual bleeding, treated_with, birth control pills)\n- (heavy menstrual bleeding, diagnosed_by, evaluation of menopausal status)\n- (heavy menstrual bleeding, diagnosed_by, evaluation of the source of bleeding)\n- (heavy menstrual bleeding, treated_with, tranexamic acid)\n- (heavy menstrual bleeding, diagnosed_by, evaluation of pregnancy status)\n- (heavy menstrual bleeding, treated_with, painkillers)\n- (heavy menstrual bleeding, complication, none)\n- (heavy menstrual bleeding, treated_with, danazol)\n- (heavy menstrual bleeding, treated_with, surgery)\n- (heavy menstrual bleeding, symptoms, excessively heavy flow)\n- (allopurinol, administered_by, oral)\n- (heavy menstrual bleeding, symptoms, loss of more than 80 mL of blood)\n- (heavy menstrual bleeding, defined_as, abnormal uterine bleeding)\n- (drugs, treats, disease)\n- (heavy menstrual bleeding, symptoms, bleeding lasting more than 7 days)"
+    },
+    {
+      "question": "A 23-year-old woman comes to the physician because she is embarrassed about the appearance of her nails. She has no history of serious illness and takes no medications. She appears well. A photograph of the nails is shown. Which of the following additional findings is most likely in this patient?",
+      "gold": "A",
+      "votes": [
+        "A"
+      ],
+      "predicted": "A",
+      "context": "- (drugs, treats, disease)"
+    },
+    {
+      "question": "A 24-year-old G2P1 woman at 39 weeks’ gestation presents to the emergency department complaining of painful contractions occurring every 10 minutes for the past 2 hours, consistent with latent labor. She says she has not experienced vaginal discharge, bleeding, or fluid leakage, and is currently taking no medications. On physical examination, her blood pressure is 110/70 mm Hg, heart rate is 86/min, and temperature is 37.6°C (99.7°F). She has had little prenatal care and uses condoms inconsistently. Her sexually transmitted infections status is unknown. As part of the patient’s workup, she undergoes a series of rapid screening tests that result in the administration of zidovudine during delivery. The infant is also given zidovudine to reduce the risk of transmission. A confirmatory test is then performed in the mother to confirm the diagnosis of HIV. Which of the following is most true about the confirmatory test?",
+      "gold": "D",
+      "votes": [
+        "A"
+      ],
+      "predicted": "A",
+      "context": "- (labor, treated_with, morphine)\n- (hiv infection, risk_factor, lung cancer)\n- (jaundice, causes, infections)"
+    },
+    {
+      "question": "A 72-year-old man comes to the physician because of a 2-month history of fatigue and worsening abdominal pain. During this period, he also has excessive night sweats and shortness of breath on exertion. Over the past 3 months, he has had a 5.6-kg (12-lb) weight loss. He had a myocardial infarction 3 years ago. He has hypertension, diabetes mellitus, and chronic bronchitis. His medications include insulin, aspirin, lisinopril, and an albuterol inhaler. He has smoked half a pack of cigarettes for the past 45 years. Vital signs are within normal limits. The spleen is palpated 6 cm below the left costal margin. Laboratory studies show:\nHemoglobin 6.4 g/dL\nMean corpuscular volume 85 μm3\nLeukocyte count 5,200/mm3\nPlatelet count 96,000/mm3\nA blood smear is shown. Bone marrow aspiration shows extensive fibrosis and a few scattered plasma cells. A JAK 2 assay is positive. Which of the following is the most appropriate next step in management?\"",
+      "gold": "D",
+      "votes": [
+        "A"
+      ],
+      "predicted": "A",
+      "context": "- (bronchial condition, defined_by, necrosis and fibrosis of the respiratory tract)\n- (type 2 diabetes, diagnosed_by, glycated hemoglobin)\n- (bronchial condition, complication, necrosis and fibrosis of the respiratory tract)\n- (glycated hemoglobin, associated_with, cardiovascular disease)\n- (glycated hemoglobin, diagnosed_by, measuring hba1c)\n- (glycated hemoglobin, associated_with, nephropathy)\n- (aspirin, treated_with, kawasaki disease)\n- (atrial fibrillation, treated_with, weight loss)\n- (atrial fibrillation, symptoms, shortness of breath)\n- (masld, treated_with, weight loss)\n- (glycated hemoglobin, causes, excessive sugar in the bloodstream)\n- (atenolol, causes, shortness of breath)\n- (ceftriaxone, causes, hemolytic anemia)\n- (metoprolol, treated_with, myocardial infarction)\n- (glycated hemoglobin, associated_with, retinopathy)\n- (myocardial infarction, treated_with, metoprolol)\n- (weight loss, treated_with, hypertension)\n- (fatigue, causes, heart disease)\n- (aspirin, treated_with, rheumatic fever)\n- (coronary artery disease, symptoms, fatigue)"
+    },
+    {
+      "question": "A 20-year-old man comes to the physician because of worsening gait unsteadiness and bilateral hearing loss for 1 month. He has had intermittent tingling sensations on both cheeks over this time period. He has no history of serious medical illness and takes no medications. Audiometry shows bilateral sensorineural hearing loss. Genetic evaluation shows a mutation of a tumor suppressor gene on chromosome 22 that encodes merlin. This patient is at increased risk for which of the following conditions?",
+      "gold": "B",
+      "votes": [
+        "A"
+      ],
+      "predicted": "A",
+      "context": "- (sensorineural hearing loss, causes, genetic mutations)\n- (sensorineural hearing loss, risk_factor, genetic mutations)\n- (sensorineural hearing loss, symptoms, difficulty understanding speech)\n- (sensorineural hearing loss, causes, infection)\n- (sensorineural hearing loss, symptoms, tinnitus)\n- (sensorineural hearing loss, symptoms, vertigo)\n- (sensorineural hearing loss, risk_factor, age)\n- (sensorineural hearing loss, symptoms, difficulty understanding on the telephone)\n- (sensorineural hearing loss, symptoms, loss of acuity in distinguishing foreground voices)\n- (sensorineural hearing loss, causes, noise-induced hearing loss)\n- (sensorineural hearing loss, treated_with, prednisone)\n- (sensorineural hearing loss, defined_as, damage to the inner ear, sensory organ, or the vestibulocochlear nerve)\n- (sensorineural hearing loss, causes, damage to cochlear hair cells)\n- (sensorineural hearing loss, causes, prolonged exposure to environmental noise)\n- (sensorineural hearing loss, symptoms, perception that people mumble when speaking)\n- (sensorineural hearing loss, causes, ototoxic drugs)\n- (sensorineural hearing loss, risk_factor, being in loud environments regularly)\n- (sensorineural hearing loss, risk_factor, prolonged exposure to environmental noise)\n- (tumor, symptoms, decrease in size)\n- (sensorineural hearing loss, risk_factor, using headphones at high volume)"
+    },
+    {
+      "question": "A 47-year-old executive schedules an appointment his physician for a routine medical check-up. He currently has no complaints and claims to be “as fit as a fiddle.” The physical examination findings are unremarkable, except for a mid-systolic murmur heard in the 2nd left intercostal space that radiates to the carotids on auscultation. The physician instructs the patient to stand from a supine position with the stethoscope still placed on his chest. Which of the following changes would occur with this maneuver?",
+      "gold": "D",
+      "votes": [
+        "A"
+      ],
+      "predicted": "A",
+      "context": "- (auscultation, used_for, identifying respiratory sounds)"
+    },
+    {
+      "question": "A microbiologist is studying the emergence of a virulent strain of the virus. After a detailed study of the virus and its life cycle, he proposes a theory: Initially, a host cell is co-infected with 2 viruses from the same virus family. Within the host cell, concomitant production of various genome segments from both viruses occurs. Ultimately, the different genome segments from the viruses are packaged into a unique and novel virus particle. The newly formed virus particle is both stable and viable and is a new strain from the virus family that caused the outbreak of infection. Which of the following viruses is capable of undergoing the above-mentioned process?",
+      "gold": "C",
+      "votes": [
+        "A"
+      ],
+      "predicted": "A",
+      "context": "- (viral infection, more_common_in, adults)\n- (conjunctivitis, causes, viral infection)\n- (eye pain, causes, viral infection)"
+    },
+    {
+      "question": "A 59-year-old overweight woman presents to the urgent care clinic with the complaint of severe abdominal pain for the past 2 hours. She also complains of a dull pain in her back with nausea and vomiting several times. Her pain has no relation with food. Her past medical history is significant for recurrent abdominal pain due to cholelithiasis. Her father died at the age of 60 with some form of abdominal cancer. Her temperature is 37°C (98.6°F), respirations are 15/min, pulse is 67/min, and blood pressure is 122/98 mm Hg. Physical exam is unremarkable. However, a CT scan of the abdomen shows a calcified mass near her gallbladder. Which of the following diagnoses should be excluded first in this patient?",
+      "gold": "B",
+      "votes": [
+        "A"
+      ],
+      "predicted": "A",
+      "context": "- (nausea, symptoms, discomfort on the abdomen)\n- (cancer, symptoms, tumor)\n- (pancreatitis, symptoms, vomiting)\n- (pancreatitis, symptoms, nausea)\n- (nausea, defined_as, unpleasant sensation in the stomach)\n- (vomiting, causes, brain tumors)\n- (epistaxis, symptoms, vomiting)\n- (epistaxis, symptoms, nausea)\n- (vomiting, defined_as, forceful expulsion of stomach contents)\n- (obesity, complication, cancer)\n- (nausea, symptoms, discomfort on the chest)\n- (nausea, causes, intense pain)\n- (nausea, causes, gastroenteritis)\n- (fever, causes, cancer)\n- (nausea, symptoms, discomfort on the back of the throat)\n- (vomiting, treated_with, antiemetics)\n- (vomiting, treated_with, intravenous fluid)\n- (nausea, causes, gastrointestinal disorders)\n- (cancer, treated_with, remission)\n- (vomiting, causes, gastroenteritis)"
+    },
+    {
+      "question": "A 7-year-old boy is brought to his pediatrician’s office for a follow-up visit. He was diagnosed with asthma when he was 3 years old and has since been on treatment for the condition. He is currently on a β-agonist inhaler because of exacerbation of his symptoms. He has observed that his symptoms are more prominent in springtime, especially when the new flowers are blooming. His mother has a backyard garden and whenever he goes out to play there, he experiences chest tightness with associated shortness of breath. He has been advised to take more precaution during this seasonal change and to stay away from pollen. He is also being considered for an experimental therapy, which attenuates the activity of certain mediators which cause his asthmatic attack. The targeted mediator favors the class switching of antibodies. A reduction in this mechanism will eventually reduce the exaggerated response observed during his asthmatic attacks, even when exposed to an allergen. Which of the following mediators is described in this experimental study?",
+      "gold": "D",
+      "votes": [
+        "B"
+      ],
+      "predicted": "B",
+      "context": "- (asthma, treated_with, dyspnea treatment)\n- (asthma, causes, wheezing)\n- (dyspnea, causes, asthma)\n- (allergen immunotherapy, used_to_treat, allergic rhinitis)\n- (allergic rhinitis, caused_by, pollen)\n- (aspirin, exacerbates, asthma)\n- (cough, causes, asthma)\n- (allergic rhinitis, treated_with, allergen immunotherapy)\n- (pollen, causes, allergies)\n- (atenolol, causes, shortness of breath)\n- (dyspnea, symptoms, chest tightness)\n- (atrial fibrillation, symptoms, shortness of breath)"
+    },
+    {
+      "question": "A 3-month-old boy is brought the emergency department by his parents after an episode of cyanosis and muscle hypotonia that resolved after 2 minutes. Diagnostic evaluation fails to discover an exact etiology of the boy's symptoms and the episode is classified as a brief resolved unexplained event (BRUE). The risk profile for BRUE in infants remains largely unknown. The pediatrician who saw the boy in the emergency department is trying to identify risk factors for BRUE. She is aware of several confounders, including age, socioeconomic background, and family history of medical illness. She recruits 75 infants under 1 year of age with BRUE and 75 infants without BRUE of the same age, socioeconomic background, and family history of medical illness. She then compares the two groups with regard to history of feeding problems and history of recent upper respiratory infection. Which of the following methods was conducted to control confounding bias in the study?",
+      "gold": "D",
+      "votes": [
+        "A"
+      ],
+      "predicted": "A",
+      "context": "- (sensorineural hearing loss, causes, infection)"
+    },
+    {
+      "question": "A 29-year-old man presents to the emergency department due to central chest pain over the past 3 days which is constant and unrelated to exertion. The pain is sharp, severe, increases when lying down, and improves with leaning forward. The pain also radiates to his shoulders and neck. The patient has no past medical history. He has smoked 10 cigarettes per day for the past 7 years and occasionally drinks alcohol. He presents with vital signs: blood pressure 110/70 mm Hg, regular radial pulse of 95/min, and temperature 37.3°C (99.1°F). On physical exam, a scratching sound of to-and-from character is audible over the left sternal border at end-expiration with the patient leaning forward. His chest X-ray is normal and ECG is shown in the picture. Which of the following is the optimal therapy for this patient?",
+      "gold": "B",
+      "votes": [
+        "A"
+      ],
+      "predicted": "A",
+      "context": "- (chest pain, symptom, lung cancer)\n- (dyspnea, symptoms, chest pain)\n- (cardiac stress test, diagnosed_by, ecg)\n- (aspirin, treated_with, pericarditis)\n- (hypertension, complication, heart failure)\n- (physical exercise, treated_with, hypertension)\n- (cardiac stress test, monitors, blood pressure)\n- (hypertension, symptoms, none)\n- (hypertension, complication, coronary artery disease)\n- (medications, treated_with, hypertension)\n- (physical inactivity, risk_factor, hypertension)\n- (ambulatory blood pressure monitoring, diagnosed_by, hypertension)\n- (hypertension, complication, atrial fibrillation)\n- (delirium tremens, complication, high body temperature)\n- (hypertension, complication, stroke)\n- (hypertension, treated_with, metoprolol)\n- (metoprolol, treated_with, hypertension)\n- (blood pressure measurement, diagnosed_by, hypertension)\n- (midodrine, has_side_effect, hypertension)\n- (hypertension, complication, peripheral arterial disease)"
+    },
+    {
+      "question": "A 46-year-old man is brought to the emergency department for evaluation of altered mental status. He was found on the floor in front of his apartment. He is somnolent but responsive when aroused. His pulse is 64/min, respiratory rate is 15/min, and blood pressure is 120/75 mm Hg. On physical examination, an alcoholic smell and slurred speech are noted. Neurological exam shows diminished deep tendon reflexes bilaterally and an ataxic gait. His pupils are normal. Blood alcohol concentration is 0.04%. An ECG shows no abnormalities. Which of the following is the most likely cause of this patient's symptoms?",
+      "gold": "D",
+      "votes": [
+        "A"
+      ],
+      "predicted": "A",
+      "context": "- (cardiac stress test, diagnosed_by, ecg)\n- (hypothermia, causes, alcohol intoxication)\n- (atrial fibrillation, diagnosed_by, electrocardiogram)\n- (hypothermia, risk_factor, alcohol intoxication)"
+    }
+  ]
+}

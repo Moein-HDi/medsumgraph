@@ -3,10 +3,10 @@ import json
 import re
 
 import prompts
+from data.kg_builder import _parse_json_list
 from graph import reranker
 from graph.kg_store import KnowledgeGraph
 from llm_client import LLMClient
-from data.kg_builder import _parse_json_list
 
 
 def _entities_from_json(resp: str) -> list[str]:

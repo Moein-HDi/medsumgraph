@@ -10,9 +10,10 @@ from tqdm import tqdm
 import config
 import prompts
 from data import kg_builder, medqa_loader
-from embedder import embed, cosine_similarity
+from embedder import cosine_similarity, embed
 from graph.kg_store import KnowledgeGraph
 from llm_client import LLMClient
+from logging_utils import log
 from retrieval import hybrid_retrieve
 
 ANSWER_RE = re.compile(r"\b([A-D])\b")
@@ -75,9 +76,11 @@ def run_question(
         system = prompts.MEDSUMGRAPH_SYSTEM
 
     votes: list[str] = []
-    for _ in range(config.ENSEMBLE_SIZE):
+    for i in range(config.ENSEMBLE_SIZE):
+        log("Eval: %s LLM call %d/%d", q.get("id", "?"), i + 1, config.ENSEMBLE_SIZE)
         resp = llm.chat(system, prompt)
         votes.append(_answer_letter(resp) or "")
+        log("Eval: %s vote %d -> %s", q.get("id", "?"), i + 1, votes[-1])
 
     counter = Counter(v for v in votes if v)
     if counter:
@@ -119,6 +122,7 @@ def evaluate(
         "results": results,
     }
     if out_path:
+        out_path = Path(out_path)
         out_path.parent.mkdir(parents=True, exist_ok=True)
         with open(out_path, "w", encoding="utf-8") as f:
             json.dump(report, f, ensure_ascii=False, indent=2)

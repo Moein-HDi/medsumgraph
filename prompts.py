@@ -15,8 +15,8 @@ SUMMARIZE_SYSTEM = (
 )
 
 SUMMARIZE_USER = """Summarize the following medical term information into ONLY these categories, in JSON:
-{"definition": "...", "causes": "...", "risk_factors": "...", "symptoms": "...",
- "diagnosis": "...", "treatment": "...", "complications": "...", "medication": "..."}
+{{"definition": "...", "causes": "...", "risk_factors": "...", "symptoms": "...",
+ "diagnosis": "...", "treatment": "...", "complications": "...", "medication": "..."}}
 
 Use "None" for categories not present in the text. Keep each category to at most 2 sentences.
 
@@ -32,10 +32,19 @@ RELATION_USER = """From the medical summary below, extract all meaningful medica
 [["subject", "predicate", "object"], ...]
 
 Rules:
-- Subjects and objects must be medical entities (diseases, drugs, symptoms, procedures, etc.).
-- Use a short lowercase predicate (e.g. "causes", "treated_with", "symptoms", "risk_factor", "diagnosed_by", "complication").
-- Include facts about definition, causes, risk factors, symptoms, diagnosis, treatment, complications, medication.
-- Output only the JSON array.
+- Subjects and objects MUST be specific medical entities: named diseases,
+  drugs, symptoms, procedures, lab tests, findings, or body parts. NEVER use
+  generic words like "medications", "treatment", "patients", "None",
+  "definition", "disease", "symptoms".
+- Predicate MUST be one of: causes, treated_with, risk_factor, symptoms,
+  diagnosed_by, complication, medication, prevents, contraindicated_with,
+  associated_with, indicates, defined_as. Use nothing else.
+- Direction matters: (drug, treated_with, disease) means the drug TREATS the
+  disease. (disease, treated_with, drug) is also fine — but never both for
+  the same pair, and never (drug, treated_with, drug).
+- Only include facts that are directly stated or strongly implied by the
+  summary. Do not invent relationships.
+- Output ONLY the JSON array. If no relationships exist, output [].
 
 Medical summary:
 {summary}"""

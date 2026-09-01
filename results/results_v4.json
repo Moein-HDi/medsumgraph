@@ -1,0 +1,186 @@
+{
+  "n": 20,
+  "accuracy": 0.2,
+  "results": [
+    {
+      "question": "A junior orthopaedic surgery resident is completing a carpal tunnel repair with the department chairman as the attending physician. During the case, the resident inadvertently cuts a flexor tendon. The tendon is repaired without complication. The attending tells the resident that the patient will do fine, and there is no need to report this minor complication that will not harm the patient, as he does not want to make the patient worry unnecessarily. He tells the resident to leave this complication out of the operative report. Which of the following is the correct next action for the resident to take?",
+      "gold": "B",
+      "votes": [
+        "A"
+      ],
+      "predicted": "A",
+      "context": "- (Suicide, complication, Injury)\n- (Injury, causes, Arthralgia)\n- (Injury, causes, Exophthalmos)\n- (Ear pain, causes, Injury)"
+    },
+    {
+      "question": "A 67-year-old man with transitional cell carcinoma of the bladder comes to the physician because of a 2-day history of ringing sensation in his ear. He received this first course of neoadjuvant chemotherapy 1 week ago. Pure tone audiometry shows a sensorineural hearing loss of 45 dB. The expected beneficial effect of the drug that caused this patient's symptoms is most likely due to which of the following actions?",
+      "gold": "D",
+      "votes": [
+        "A"
+      ],
+      "predicted": "A",
+      "context": "- (Sensorineural hearing loss, causes, ototoxic drugs)\n- (Sensorineural hearing loss, symptoms, tinnitus)\n- (Sensorineural hearing loss, causes, damage to the inner ear)\n- (Sensorineural hearing loss, causes, infection)\n- (Prostate cancer, treated_with, chemotherapy)\n- (chemotherapy, treated_with, Cushing's syndrome)\n- (Cushing's syndrome, treated_with, chemotherapy)\n- (chemotherapy, causes, nausea)\n- (Acute lymphoblastic leukemia, treated_with, chemotherapy)\n- (chemotherapy, causes, vomiting)\n- (Chondrosarcoma, contraindicated_with, chemotherapy)\n- (Mesenchymal chondrosarcoma, treated_with, chemotherapy)\n- (Carcinoma, defined_as, malignant neoplasm of epithelial cells)\n- (DNA damage, causes, Carcinoma)\n- (Carcinoma, causes, uncontrolled cell growth)"
+    },
+    {
+      "question": "Two weeks after undergoing an emergency cardiac catherization with stenting for unstable angina pectoris, a 61-year-old man has decreased urinary output and malaise. He has type 2 diabetes mellitus and osteoarthritis of the hips. Prior to admission, his medications were insulin and naproxen. He was also started on aspirin, clopidogrel, and metoprolol after the coronary intervention. His temperature is 38°C (100.4°F), pulse is 93/min, and blood pressure is 125/85 mm Hg. Examination shows mottled, reticulated purplish discoloration of the feet. Laboratory studies show:\nHemoglobin count 14 g/dL\nLeukocyte count 16,400/mm3\nSegmented neutrophils 56%\nEosinophils 11%\nLymphocytes 31%\nMonocytes 2%\nPlatelet count 260,000/mm3\nErythrocyte sedimentation rate 68 mm/h\nSerum\nUrea nitrogen 25 mg/dL\nCreatinine 4.2 mg/dL\nRenal biopsy shows intravascular spindle-shaped vacuoles. Which of the following is the most likely cause of this patient's symptoms?\"",
+      "gold": "B",
+      "votes": [
+        "A"
+      ],
+      "predicted": "A",
+      "context": "- (Nitroglycerin, treated_with, angina pectoris)\n- (angina pectoris, treated_with, Isosorbide dinitrate)\n- (Aspirin, treated_with, pericarditis)\n- (Isosorbide dinitrate, treated_with, angina pectoris)\n- (Aspirin, treated_with, Coronary artery disease)\n- (Aspirin, treated_with, Heart Attack)\n- (Aspirin, prevents, blood clots)\n- (clopidogrel, treated_with, platelet activation)\n- (Adrenergic beta-antagonists, treated_with, angina pectoris)\n- (Semaglutide, treated_with, Type 2 Diabetes mellitus)\n- (Tirzepatide, treated_with, Type 2 Diabetes mellitus)\n- (Thrombocytopenia, symptoms, Microvascular diseases of the kidney)\n- (Naproxen, treated_with, acute gout)\n- (Naproxen, causes, heart disease)\n- (Microvascular diseases of the kidney, causes, Thrombocytopenia)\n- (Kidney problems, risk_factor, Naproxen)\n- (Glomerulonephritis, symptoms, Acute kidney injury)\n- (Naproxen, treated_with, inflammatory diseases)\n- (Naproxen, medication, acute gout)\n- (Leukocytosis, associated_with, Pernicious anemia)"
+    },
+    {
+      "question": "A 39-year-old woman is brought to the emergency department because of fevers, chills, and left lower quadrant pain. Her temperature is 39.1°C (102.3°F), pulse is 126/min, respirations are 28/min, and blood pressure is 80/50 mm Hg. There is blood oozing around the site of a peripheral intravenous line. Pelvic examination shows mucopurulent discharge from the cervical os and left adnexal tenderness. Laboratory studies show:\nPlatelet count 14,200/mm3\nFibrinogen 83 mg/mL (N = 200–430 mg/dL)\nD-dimer 965 ng/mL (N < 500 ng/mL)\nWhen phenol is applied to a sample of the patient's blood at 90°C, a phosphorylated N-acetylglucosamine dimer with 6 fatty acids attached to a polysaccharide side chain is identified. A blood culture is most likely to show which of the following?\"",
+      "gold": "D",
+      "votes": [
+        "D"
+      ],
+      "predicted": "D",
+      "context": "- (Sepsis, diagnosed_by, blood cultures)\n- (fever, symptoms, mucocutaneous condition)\n- (Fever, symptoms, Chills)\n- (Paracetamol, treated_with, fever)\n- (Typhoid fever, diagnosed_by, blood sample culture)\n- (Thrombocytopenia, defined_as, abnormally low levels of platelets in the blood)\n- (Primary myelofibrosis, symptoms, fever)\n- (Fever, symptoms, Sepsis)\n- (Gangrene, symptoms, fever)\n- (Platelet count, indicates, Thrombocytopenia)\n- (Indometacin, treated_with, fever)\n- (Thrombocytopenia, diagnosed_by, platelet count)\n- (Chills, symptoms, Bacteremia)\n- (Etoposide, causes, fever)\n- (Acute lymphoblastic leukemia, symptoms, fever)\n- (Cytokines, causes, Chills)\n- (Blood platelet disorders, causes, Coagulopathy)\n- (Q Fever, symptoms, fever)\n- (Prolonged or excessive bleeding, symptoms, Thrombocytopenia)\n- (Excessive bleeding, associated_with, Coagulopathy)"
+    },
+    {
+      "question": "A 35-year-old man comes to the physician because of itchy, watery eyes for the past week. He has also been sneezing multiple times a day during this period. He had a similar episode 1 year ago around springtime. He has iron deficiency anemia and ankylosing spondylitis. Current medications include ferrous sulfate, artificial tear drops, and indomethacin. He works as an elementary school teacher. His vital signs are within normal limits. Visual acuity is 20/20 without correction. Physical examination shows bilateral conjunctival injection with watery discharge. The pupils are 3 mm, equal, and reactive to light. Examination of the anterior chamber of the eye is unremarkable. Which of the following is the most appropriate treatment?",
+      "gold": "B",
+      "votes": [
+        "A"
+      ],
+      "predicted": "A",
+      "context": "- (Allergic rhinitis, symptoms, red, itchy, and watery eyes)\n- (Injection, contraindicated_with, Anaphylaxis)\n- (Allergic rhinitis, symptoms, sneezing)\n- (Iron deficiency anemia, diagnosed_by, Serum ferritin)\n- (Vulvovaginitis, symptoms, Discharge)\n- (Ferritin, indicates, Iron deficiency anemia)\n- (HLA-B27, associated_with, ankylosing spondylitis)\n- (Gonorrhea, symptoms, Discharge)"
+    },
+    {
+      "question": "A 39-year-old man presents to the emergency department because of progressively worsening chest pain and nausea that started at a local bar 30 minutes prior. The pain radiates to the epigastric area. He has a 5-year history of untreated hypertension. He has smoked 1 pack of cigarettes daily for the past 5 years and started abusing cocaine 2 weeks before his emergency room visit. The patient is diaphoretic and in marked distress. What should be the first step in management?",
+      "gold": "D",
+      "votes": [
+        "A"
+      ],
+      "predicted": "A",
+      "context": "- (Phentolamine, treated_with, hypertension)\n- (chest pain, complication, Phenylephrine)\n- (Timolol, treated_with, chest pain)\n- (Supraventricular tachycardia, symptoms, chest pain)\n- (Adrenergic receptor reuptake inhibitors, treated_with, hypertension)\n- (Arrhythmias, symptoms, chest pain)\n- (Adrenergic receptor agonists, treated_with, hypertension)\n- (Adrenergic receptor antagonists, treated_with, hypertension)\n- (ACE inhibitors, treated_with, hypertension)\n- (Dibenyline, treated_with, hypertension)\n- (Insufficient blood flow to the heart muscle, causes, chest pain)\n- (Angina, causes, chest pain)\n- (Angina, symptoms, chest pain)\n- (Hypertrophic cardiomyopathy, symptoms, chest pain)\n- (Dilated cardiomyopathy, causes, cocaine)\n- (Adrenergic beta-antagonists, treated_with, hypertension)\n- (Smoking, risk_factor, Pneumothorax)\n- (Dibenzyline, treated_with, hypertension)\n- (Dilated cardiomyopathy, symptoms, chest pain)\n- (Methylprednisolone, causes, hypertension)"
+    },
+    {
+      "question": "A 68-year-old male comes to the physician for evaluation of right flank pain. He has a history of diabetes and peripheral artery disease. His blood pressure is 160/90 mm Hg. Physical examination shows abdominal tenderness and right flank tenderness. An ultrasound shows dilation of the right ureter and renal pelvis. Which of the following is the most likely underlying cause of this patient's condition?",
+      "gold": "C",
+      "votes": [
+        "A"
+      ],
+      "predicted": "A",
+      "context": "- (Diabetes, complication, Kidney disorders)\n- (Glomerulonephritis, causes, Diabetes)\n- (Diabetes, symptoms, Polyuria)\n- (Atherosclerosis, symptoms, Peripheral Artery Disease)\n- (Diabetes, risk_factor, Pyelonephritis)\n- (Diabetes, causes, Polyuria)\n- (Chronic kidney failure, causes, Diabetes)\n- (Urinary Tract Infection, risk_factor, Diabetes)\n- (dull achy pain, symptoms, Tenderness)\n- (Angiotensin, causes, hypertension)\n- (Midodrine, causes, hypertension)\n- (Atherosclerosis, causes, Peripheral Artery Disease)\n- (Cushing's syndrome, causes, hypertension)\n- (Atherosclerosis, complication, Peripheral Artery Disease)\n- (Strangulation, symptoms, Tenderness)\n- (Gallstones, risk_factor, Diabetes)\n- (Methylprednisolone, causes, hypertension)\n- (Adrenergic receptor antagonists, treated_with, hypertension)\n- (Phentolamine, treated_with, hypertension)\n- (Hyperlipidemia, causes, Diabetes)"
+    },
+    {
+      "question": "A 65-year-old man is brought to the emergency department 30 minutes after the onset of acute chest pain. He has hypertension and asthma. Current medications include atorvastatin, lisinopril, and an albuterol inhaler. He appears pale and diaphoretic. His pulse is 114/min and blood pressure is 130/88 mm Hg. An ECG shows ST-segment depressions in leads II, III, and aVF. Laboratory studies show an increased serum troponin T concentration. The patient is treated for acute coronary syndrome and undergoes percutaneous transluminal coronary angioplasty. At the time of discharge, echocardiography shows a left ventricular ejection fraction of 58%. In addition to aspirin, which of the following drugs should be added to this patient's medication regimen?",
+      "gold": "C",
+      "votes": [
+        "A"
+      ],
+      "predicted": "A",
+      "context": "- (Aspirin, treated_with, Heart Attack)\n- (Aspirin, treated_with, Coronary artery disease)\n- (Aspirin, prevents, heart attack)\n- (Aspirin, treated_with, pericarditis)\n- (Adrenergic receptor antagonists, treated_with, hypertension)\n- (Lisinopril, treated_with, Heart Attack)\n- (Adrenergic receptor reuptake inhibitors, treated_with, hypertension)\n- (ACE inhibitors, treated_with, hypertension)\n- (Isoprenaline, treated_with, asthma)\n- (Adrenergic receptor antagonists, treated_with, asthma)\n- (Adrenergic receptor reuptake inhibitors, treated_with, asthma)\n- (chest pain, complication, Phenylephrine)\n- (Timolol, treated_with, chest pain)\n- (Adrenergic receptor agonists, treated_with, hypertension)\n- (Lisinopril, treated_with, Hypertension)\n- (Lisinopril, treated_with, Heart Failure)\n- (Adrenergic beta-antagonists, treated_with, hypertension)\n- (Lisinopril, medication, Hypertension)\n- (Codeine, medication, Aspirin)\n- (Echocardiography, treated_with, Heart failure)"
+    },
+    {
+      "question": "A 37-year-old-woman presents to her primary care physician requesting a new form of birth control. She has been utilizing oral contraceptive pills (OCPs) for the past 8 years, but asks to switch to an intrauterine device (IUD). Her vital signs are: blood pressure 118/78 mm Hg, pulse 73/min and respiratory rate 16/min. She is afebrile. Physical examination is within normal limits. Which of the following past medical history statements would make copper IUD placement contraindicated in this patient?",
+      "gold": "B",
+      "votes": [
+        "A"
+      ],
+      "predicted": "A",
+      "context": "- (IUD placement, risk_factor, Endometritis)\n- (Hormonal intrauterine device, treated_with, Heavy menstrual bleeding)\n- (Vitamin B12 injections, contraindicated_with, Oral pills)\n- (Childbirth, risk_factor, Endometritis)\n- (Caesarean section, risk_factor, Endometritis)\n- (Clindamycin, treated_with, pelvic inflammatory disease)\n- (pelvic inflammatory disease, treated_with, Clindamycin)\n- (Clindamycin, treated_with, Endometritis)\n- (Abortion, risk_factor, Endometritis)\n- (Gentamicin, treated_with, Endometritis)\n- (Endometritis, treated_with, Gentamicin)\n- (Douching, risk_factor, Endometritis)\n- (Endometritis, treated_with, Clindamycin)\n- (Menstruation, risk_factor, Endometritis)\n- (Abnormal uterine bleeding, defined_as, Menorrhagia)\n- (Menorrhagia, symptoms, Sex cord-stromal tumor)\n- (Penicillamine, treated_with, Wilson's disease)\n- (Doxycycline, treated_with, Endometritis)\n- (Endometritis, symptoms, Abnormal vaginal bleeding)\n- (Chlamydia, complication, pelvic inflammatory disease)"
+    },
+    {
+      "question": "A 23-year-old woman comes to the physician because she is embarrassed about the appearance of her nails. She has no history of serious illness and takes no medications. She appears well. A photograph of the nails is shown. Which of the following additional findings is most likely in this patient?",
+      "gold": "A",
+      "votes": [
+        "A"
+      ],
+      "predicted": "A",
+      "context": "- (Electromyogram, indicates, abnormalities)"
+    },
+    {
+      "question": "A 24-year-old G2P1 woman at 39 weeks’ gestation presents to the emergency department complaining of painful contractions occurring every 10 minutes for the past 2 hours, consistent with latent labor. She says she has not experienced vaginal discharge, bleeding, or fluid leakage, and is currently taking no medications. On physical examination, her blood pressure is 110/70 mm Hg, heart rate is 86/min, and temperature is 37.6°C (99.7°F). She has had little prenatal care and uses condoms inconsistently. Her sexually transmitted infections status is unknown. As part of the patient’s workup, she undergoes a series of rapid screening tests that result in the administration of zidovudine during delivery. The infant is also given zidovudine to reduce the risk of transmission. A confirmatory test is then performed in the mother to confirm the diagnosis of HIV. Which of the following is most true about the confirmatory test?",
+      "gold": "D",
+      "votes": [
+        "A"
+      ],
+      "predicted": "A",
+      "context": "- (HIV, defined_as, acquired defect of cellular immunity)\n- (HIV, symptoms, emaciation)\n- (HIV, symptoms, dementia)\n- (HIV, associated_with, opportunistic infections)\n- (Antiretroviral treatment, treated_with, HIV)\n- (Labor, causes, Leukocytosis)\n- (Zidovudine plus interferon-a, treated_with, Adult T-cell leukemia/lymphoma)\n- (Antiretroviral treatment, prevents, HIV)\n- (Adult T-cell leukemia/lymphoma, treated_with, Zidovudine plus interferon-a)\n- (Doxycycline, prevents, sexually transmitted infections)"
+    },
+    {
+      "question": "A 72-year-old man comes to the physician because of a 2-month history of fatigue and worsening abdominal pain. During this period, he also has excessive night sweats and shortness of breath on exertion. Over the past 3 months, he has had a 5.6-kg (12-lb) weight loss. He had a myocardial infarction 3 years ago. He has hypertension, diabetes mellitus, and chronic bronchitis. His medications include insulin, aspirin, lisinopril, and an albuterol inhaler. He has smoked half a pack of cigarettes for the past 45 years. Vital signs are within normal limits. The spleen is palpated 6 cm below the left costal margin. Laboratory studies show:\nHemoglobin 6.4 g/dL\nMean corpuscular volume 85 μm3\nLeukocyte count 5,200/mm3\nPlatelet count 96,000/mm3\nA blood smear is shown. Bone marrow aspiration shows extensive fibrosis and a few scattered plasma cells. A JAK 2 assay is positive. Which of the following is the most appropriate next step in management?\"",
+      "gold": "D",
+      "votes": [
+        "A"
+      ],
+      "predicted": "A",
+      "context": "- (Abnormally low hematocrit levels, indicates, anemia)\n- (Pernicious anemia, symptoms, Shortness of breath)\n- (Abnormal red blood cells, causes, Splenomegaly)\n- (Pulmonary fibrosis, symptoms, Shortness of breath)\n- (Methemoglobinemia, symptoms, Shortness of breath)\n- (Cardiovascular diseases, symptoms, Shortness of breath)\n- (Myelodysplastic syndrome, symptoms, Shortness of breath)\n- (Bronchospasm, symptoms, Shortness of breath)\n- (Hemolytic anemia, associated_with, Thrombocytopenia)\n- (Folate deficiency, symptoms, Shortness of breath)\n- (Primary myelofibrosis, symptoms, fatigue)\n- (Sarcoidosis, symptoms, Shortness of breath)\n- (Pulmonary fibrosis, symptoms, Weight loss)\n- (Gastrointestinal bleeding, symptoms, Shortness of breath)\n- (Shortness of breath, symptoms, Coronary artery disease)\n- (Aspirin, treated_with, Kawasaki disease)\n- (Lisinopril, treated_with, Heart Failure)\n- (Leukocyte count, diagnosed_by, Leukocytosis)\n- (Anaphylaxis, symptoms, Shortness of breath)\n- (Lisinopril, associated_with, Liver Problems)"
+    },
+    {
+      "question": "A 20-year-old man comes to the physician because of worsening gait unsteadiness and bilateral hearing loss for 1 month. He has had intermittent tingling sensations on both cheeks over this time period. He has no history of serious medical illness and takes no medications. Audiometry shows bilateral sensorineural hearing loss. Genetic evaluation shows a mutation of a tumor suppressor gene on chromosome 22 that encodes merlin. This patient is at increased risk for which of the following conditions?",
+      "gold": "B",
+      "votes": [
+        "B"
+      ],
+      "predicted": "B",
+      "context": "- (Sensorineural hearing loss, causes, genetic mutations)\n- (DiGeorge syndrome, complication, hearing loss)\n- (Turner syndrome, complication, hearing loss)\n- (Tinnitus, complication, hearing loss)\n- (Sensorineural hearing loss, causes, infection)\n- (Tay-Sachs disease, symptoms, hearing loss)\n- (Sensorineural hearing loss, symptoms, tinnitus)\n- (Sensorineural hearing loss, symptoms, vertigo)\n- (Peripheral neuropathy, causes, tingling)\n- (Furosemide, causes, hearing loss)\n- (Vancomycin, causes, hearing loss)\n- (Peripheral neuropathy, symptoms, tingling)\n- (Charcot-Marie-Tooth disease, symptoms, tingling)\n- (Presbycusis, symptoms, hearing loss)\n- (Presbycusis, causes, hearing loss)\n- (Paresthesia, causes, tingling)\n- (Fomepizole, associated_with, unsteadiness)\n- (Tumor, causes, Cushing's syndrome)\n- (Paresthesia, symptoms, tingling)\n- (Breast cancer, causes, Tumor)"
+    },
+    {
+      "question": "A 47-year-old executive schedules an appointment his physician for a routine medical check-up. He currently has no complaints and claims to be “as fit as a fiddle.” The physical examination findings are unremarkable, except for a mid-systolic murmur heard in the 2nd left intercostal space that radiates to the carotids on auscultation. The physician instructs the patient to stand from a supine position with the stethoscope still placed on his chest. Which of the following changes would occur with this maneuver?",
+      "gold": "D",
+      "votes": [
+        "A"
+      ],
+      "predicted": "A",
+      "context": "- (Auscultation, diagnosed_by, heart murmurs)\n- (Respiratory sounds, diagnosed_by, Auscultation)\n- (Auscultation, associated_with, heart)\n- (Auscultation, diagnosed_by, Wheezing)\n- (Auscultation, diagnosed_by, bowel sounds)\n- (Lung fields, associated_with, Auscultation)"
+    },
+    {
+      "question": "A microbiologist is studying the emergence of a virulent strain of the virus. After a detailed study of the virus and its life cycle, he proposes a theory: Initially, a host cell is co-infected with 2 viruses from the same virus family. Within the host cell, concomitant production of various genome segments from both viruses occurs. Ultimately, the different genome segments from the viruses are packaged into a unique and novel virus particle. The newly formed virus particle is both stable and viable and is a new strain from the virus family that caused the outbreak of infection. Which of the following viruses is capable of undergoing the above-mentioned process?",
+      "gold": "C",
+      "votes": [
+        "A"
+      ],
+      "predicted": "A",
+      "context": "- (Viruses, causes, Infection)\n- (Viral illness, causes, Infection)\n- (Infection, causes, Infectious disease)\n- (Viral infection, treated_with, No specific treatment)\n- (Bacterial growth, associated_with, Infection)\n- (Infection, treated_with, Antivirals)\n- (Viral infection, causes, Pharyngitis)\n- (Viral infection, causes, Bronchitis)\n- (Cauterization, complication, Infection)\n- (Virus, causes, Diarrhea)\n- (Bacteria, causes, Infection)\n- (Virus, causes, Exanthem)\n- (Viral infection, causes, Sinusitis)\n- (Conjunctivitis, causes, Viral infection)\n- (Virus, causes, Labyrinthitis)\n- (Pericarditis, causes, Viral infection)\n- (Pneumonia, associated_with, Infection)\n- (Gastroenteritis, causes, Infection)\n- (Infection, associated_with, Heart failure)\n- (Infection, complication, Hydrocephalus)"
+    },
+    {
+      "question": "A 59-year-old overweight woman presents to the urgent care clinic with the complaint of severe abdominal pain for the past 2 hours. She also complains of a dull pain in her back with nausea and vomiting several times. Her pain has no relation with food. Her past medical history is significant for recurrent abdominal pain due to cholelithiasis. Her father died at the age of 60 with some form of abdominal cancer. Her temperature is 37°C (98.6°F), respirations are 15/min, pulse is 67/min, and blood pressure is 122/98 mm Hg. Physical exam is unremarkable. However, a CT scan of the abdomen shows a calcified mass near her gallbladder. Which of the following diagnoses should be excluded first in this patient?",
+      "gold": "B",
+      "votes": [
+        "A"
+      ],
+      "predicted": "A",
+      "context": "- (Gallstones, symptoms, Vomiting)\n- (Cholecystitis, symptoms, Vomiting)\n- (Ascites, diagnosed_by, CT Scan)\n- (Excessive doses of Cholecalciferol, causes, Vomiting)\n- (Stomach cancer, symptoms, Vomiting)\n- (cancer, diagnosed_by, ERCP)\n- (Pancreatitis, symptoms, Vomiting)\n- (Vomiting, symptoms, Pancreatitis)\n- (Peptic ulcer disease, symptoms, Vomiting)\n- (Gastroenteritis, symptoms, Vomiting)\n- (Vomiting, causes, Brain tumors)\n- (ERCP, treated_with, cancer)\n- (Epistaxis, symptoms, Vomiting)\n- (Appendicitis, symptoms, Vomiting)\n- (Peptic ulcer, symptoms, Vomiting)\n- (Hyponatremia, causes, Vomiting)\n- (elevated hCG, indicates, cancer)\n- (Vomiting, treated_with, Antiemetics)\n- (surgery, causes, nausea)\n- (Ovarian cyst, symptoms, Vomiting)"
+    },
+    {
+      "question": "A 7-year-old boy is brought to his pediatrician’s office for a follow-up visit. He was diagnosed with asthma when he was 3 years old and has since been on treatment for the condition. He is currently on a β-agonist inhaler because of exacerbation of his symptoms. He has observed that his symptoms are more prominent in springtime, especially when the new flowers are blooming. His mother has a backyard garden and whenever he goes out to play there, he experiences chest tightness with associated shortness of breath. He has been advised to take more precaution during this seasonal change and to stay away from pollen. He is also being considered for an experimental therapy, which attenuates the activity of certain mediators which cause his asthmatic attack. The targeted mediator favors the class switching of antibodies. A reduction in this mechanism will eventually reduce the exaggerated response observed during his asthmatic attacks, even when exposed to an allergen. Which of the following mediators is described in this experimental study?",
+      "gold": "D",
+      "votes": [
+        "B"
+      ],
+      "predicted": "B",
+      "context": "- (Asthma attacks, treated_with, short-acting beta-2 adrenergic agonist)\n- (Asthma, treated_with, short-acting beta-2 adrenergic agonist)\n- (Adrenergic receptor agonists, treated_with, asthma)\n- (Adrenergic receptor antagonists, treated_with, asthma)\n- (Adrenergic receptor reuptake inhibitors, treated_with, asthma)\n- (Isoprenaline, treated_with, asthma)\n- (Leukotriene antagonists, treated_with, asthma)\n- (Overproduction of leukotrienes, complication, asthma)\n- (Leukotriene antagonists, medication, asthma)\n- (Leukotrienes, associated_with, asthma)\n- (Asthma, symptoms, Shortness of breath)\n- (Theophylline, treated_with, asthma)\n- (Dexamethasone, treated_with, asthma)\n- (Allergies, symptoms, Shortness of breath)\n- (asthma, complication, Bisoprolol)\n- (asthma, treated_with, Ipratropium bromide)\n- (Glucocorticoids, treated_with, asthma)\n- (Ipratropium bromide, treated_with, asthma)\n- (Pollen, causes, Allergic rhinitis)\n- (Exercise-induced bronchoconstriction, treated_with, short-acting beta-2 adrenergic agonist)"
+    },
+    {
+      "question": "A 3-month-old boy is brought the emergency department by his parents after an episode of cyanosis and muscle hypotonia that resolved after 2 minutes. Diagnostic evaluation fails to discover an exact etiology of the boy's symptoms and the episode is classified as a brief resolved unexplained event (BRUE). The risk profile for BRUE in infants remains largely unknown. The pediatrician who saw the boy in the emergency department is trying to identify risk factors for BRUE. She is aware of several confounders, including age, socioeconomic background, and family history of medical illness. She recruits 75 infants under 1 year of age with BRUE and 75 infants without BRUE of the same age, socioeconomic background, and family history of medical illness. She then compares the two groups with regard to history of feeding problems and history of recent upper respiratory infection. Which of the following methods was conducted to control confounding bias in the study?",
+      "gold": "D",
+      "votes": [
+        "D"
+      ],
+      "predicted": "D",
+      "context": "- (Cyanosis, diagnosed_by, history taking)\n- (Respiratory distress syndrome, symptoms, Cyanosis)\n- (Cyanosis, diagnosed_by, physical examination)\n- (Down syndrome, symptoms, hypotonia)\n- (Amiodarone, causes, Cyanosis)\n- (Methemoglobinemia, symptoms, Cyanosis)\n- (Cyanosis, causes, decrease in oxygen bound to hemoglobin)\n- (Methemoglobinemia, causes, Cyanosis)\n- (Ear lobes, associated_with, Cyanosis)\n- (Mucous membranes, associated_with, Cyanosis)\n- (Hoarseness, causes, Upper respiratory infection)\n- (Lips, associated_with, Cyanosis)\n- (Nail beds, associated_with, Cyanosis)\n- (Cyanosis, causes, structural defects in the hemoglobin molecule)\n- (Silver, causes, Cyanosis)"
+    },
+    {
+      "question": "A 29-year-old man presents to the emergency department due to central chest pain over the past 3 days which is constant and unrelated to exertion. The pain is sharp, severe, increases when lying down, and improves with leaning forward. The pain also radiates to his shoulders and neck. The patient has no past medical history. He has smoked 10 cigarettes per day for the past 7 years and occasionally drinks alcohol. He presents with vital signs: blood pressure 110/70 mm Hg, regular radial pulse of 95/min, and temperature 37.3°C (99.1°F). On physical exam, a scratching sound of to-and-from character is audible over the left sternal border at end-expiration with the patient leaning forward. His chest X-ray is normal and ECG is shown in the picture. Which of the following is the optimal therapy for this patient?",
+      "gold": "B",
+      "votes": [
+        "A"
+      ],
+      "predicted": "A",
+      "context": "- (chest pain, complication, Phenylephrine)\n- (Timolol, treated_with, chest pain)\n- (Arrhythmias, symptoms, chest pain)\n- (Myocarditis, symptoms, chest pain)\n- (Supraventricular tachycardia, symptoms, chest pain)\n- (Bronchitis, symptoms, chest pain)\n- (Hypertrophic cardiomyopathy, symptoms, chest pain)\n- (Insufficient blood flow to the heart muscle, causes, chest pain)\n- (Angina, symptoms, chest pain)\n- (Dilated cardiomyopathy, symptoms, chest pain)\n- (Angina, causes, chest pain)\n- (Aspirin, treated_with, pericarditis)\n- (Tachycardia, symptoms, Bacteremia)\n- (Cocaine, causes, Tachycardia)\n- (Hypertrophic cardiomyopathy, risk_factor, hypertension)\n- (Tachycardia, causes, Atrial fibrillation)\n- (Hypertrophic cardiomyopathy, causes, hypertension)\n- (Phentolamine, treated_with, hypertension)\n- (Metoprolol, treated_with, hypertension)\n- (ACE inhibitors, treated_with, hypertension)"
+    },
+    {
+      "question": "A 46-year-old man is brought to the emergency department for evaluation of altered mental status. He was found on the floor in front of his apartment. He is somnolent but responsive when aroused. His pulse is 64/min, respiratory rate is 15/min, and blood pressure is 120/75 mm Hg. On physical examination, an alcoholic smell and slurred speech are noted. Neurological exam shows diminished deep tendon reflexes bilaterally and an ataxic gait. His pupils are normal. Blood alcohol concentration is 0.04%. An ECG shows no abnormalities. Which of the following is the most likely cause of this patient's symptoms?",
+      "gold": "D",
+      "votes": [
+        "A"
+      ],
+      "predicted": "A",
+      "context": "- (Alcohol Intoxication, symptoms, Coma)\n- (Alcohol Intoxication, diagnosed_by, Physical examination)\n- (Alcohol Intoxication, symptoms, Mild sedation)\n- (Alcohol Intoxication, symptoms, Trouble walking)\n- (Supportive care, treated_with, Alcohol Intoxication)\n- (Somnolence, symptoms, Lack of Mental Agility)\n- (Somnolence, symptoms, Weakness)\n- (Circadian Rhythm Disorders, symptoms, Somnolence)\n- (cardiac stress test, diagnosed_by, ECG)\n- (Slurred speech, symptoms, Transient Ischemic Attack (TIA))\n- (Somnolence, symptoms, Lethargy)\n- (Impulsive personality, risk_factor, Alcohol Intoxication)\n- (Alcohol, causes, Alcohol Intoxication)\n- (Ethanol, causes, Alcohol Intoxication)\n- (Social situations with heavy drinking, risk_factor, Alcohol Intoxication)\n- (Somnolence, complication, Danger while Driving)\n- (Acetaldehyde, causes, Alcohol Intoxication)\n- (Cardiac tamponade, diagnosed_by, ECG)\n- (Valproate, causes, Somnolence)"
+    }
+  ]
+}

@@ -20,6 +20,12 @@ python -m venv .venv
 pip install -r requirements.txt
 
 copy .env.example .env          # then edit GROQ_API_KEY
+
+Optional Liara fallback: if Groq keeps failing (e.g. sustained rate limits
+during long builds), set `LIARA_API_KEY` and `LIARA_BASE_URL` in `.env` (Liara
+gives you a per-project base URL like `https://ai.liara.ir/api/<PROJECT_ID>/v1`).
+The pipeline then automatically falls back to Liara after Groq retries are
+exhausted.
 ```
 
 ## UMLS preparation
@@ -43,12 +49,49 @@ Only `MRCONSO.RRF` (names), `MRDEF.RRF` (definitions) and `MRSTY.RRF`
 
 ## Usage
 
-Build the knowledge graph (resumable; per-entity results are cached in `cache/kg_entities/`):
+Build the knowledge graph (resumable; per-entity results are cached in
+`cache/kg_entities/`, so stopping mid-build and re-running only processes the
+entities that never finished):
 
 ```bash
-python run_pipeline.py build-kg --limit-entities 100   # smoke test on 100 entities
-python run_pipeline.py build-kg                          # full build
+python run_pipeline.py build-kg --scope medqa --limit-questions 50   # smoke test: extract scope from 50 questions, build those entities
+python run_pipeline.py build-kg --scope medqa                        # recommended: full MedQA-scoped build (~1 day)
+python run_pipeline.py build-kg --scope all                          # whole filtered UMLS subset (very slow — weeks)
+python run_pipeline.py build-kg --no-type-filter                     # skip the semantic-type filter (not recommended)
 ```
+
+### What `--scope` does
+
+- **`--scope medqa` (default)** — the corpus is filtered to concepts that are
+  actually relevant to MedQA:
+  1. Each MedQA train+test question gets its medical entities extracted by the
+     LLM (1 Groq call per question, cached per-question in
+     `cache/medqa_scope/<id>.json`, so extraction is resumable and
+     failure-tolerant).
+  2. Extracted entities are matched to UMLS CUIs via the `MRCONSO` name index.
+  3. Only those CUIs are built into the graph. This keeps the build at a few
+     thousand entities (~1 day) instead of ~3.5M (months).
+- **`--scope all`** — processes the entire semantic-type-filtered subset
+  (still ~300-500k entities → weeks). Only useful if you have a lot of time
+  or a small filtered corpus.
+
+### Semantic-type filter
+
+By default only concepts whose UMLS semantic type is in
+`config.ALLOWED_SEMANTIC_TYPES` are used (diseases, symptoms, findings, drugs,
+procedures, lab values, anatomy, risk factors, ...). This drops the ~3.5M
+concepts down to the clinically meaningful ~300-500k before any other
+processing. Tune the allowlist in `config.py`; `--no-type-filter` disables it.
+
+### Failure tolerance & resume
+
+- Per-entity LLM calls that fail (network, rate limit, etc.) are logged and
+  skipped — **no cache file is written**, so the next run retries exactly those
+  entities.
+- `Ctrl+C` mid-build is safe: completed entities stay cached; the final graph
+  file is only written when the run finishes (or on the next successful run).
+- A `build-kg` run after a partial one resumes from cache — previously
+  completed entities are not re-processed.
 
 Evaluate on MedQA (USMLE):
 
@@ -60,6 +103,39 @@ python run_pipeline.py evaluate --baseline              # baseline prompt (no KG
 ```
 
 Results (accuracy + per-question detail) are written to `results/results.json`.
+
+## What the smoke test verified
+
+The full pipeline now runs end-to-end on a small scope:
+
+```bash
+python run_pipeline.py build-kg --scope medqa --limit-questions 5
+# -> Restricted to 22 entities relevant to MedQA
+# -> Graph saved ... with 176 triples
+python run_pipeline.py evaluate --limit 2
+# -> Accuracy: 0.0000 (0/2)   (2 questions is too few to mean anything)
+```
+
+During bring-up the following were fixed:
+
+- **MRCONSO.RRF column indices** — the 2026AA rows have 19 fields with
+  `CUI|LAT|...|ISPREF|...|SAB|...|STR` at indices 0/1/4/10/14 (not the older
+  21-field layout). Verified against `MRCOLS.RRF` and raw rows.
+- **ISPREF value** is `PF` (not `Y`) in this release; both are accepted.
+- **MRDEF.RRF** definition column is index 5 (not 6).
+- **Preferred-name selection** picks the most frequent PF name per CUI (e.g.
+  "ampicillin" over "AP") — the shortest-name heuristic picked abbreviations.
+- **Prompt template braces** — the SUMMARIZE prompt contains literal JSON
+  braces (`{definition}`, ...) which broke `.format()`; they are now escaped
+  as `{{...}}`.
+- The **name index and synonym index** (for MedQA-scope CUI resolution) are
+  cached to disk, so a re-run skips the multi-minute MRCONSO parse.
+- LLM requests have a 60s timeout + retry/backoff so a hung request fails
+  fast instead of blocking the pipeline.
+
+A scope graph of only 22 entities (5 questions) will return
+"No relevant knowledge graph facts found" for most test questions — that is
+expected until the full `--scope medqa` build (all 2,550 questions) is done.
 
 ## Notes
 
