@@ -76,7 +76,7 @@ def run_question(
         context = ""
     else:
         examples = fewshot.retrieve(q["question"])
-        triples = hybrid_retrieve(llm, kg, q["question"])
+        triples = hybrid_retrieve(llm, kg, q["question"]+"\n"+q["options"])
         context = prompts.build_kg_context(triples)
         prompt = prompts.MEDSUMGRAPH_USER.format(
             fewshots=prompts.build_fewshots(examples),
