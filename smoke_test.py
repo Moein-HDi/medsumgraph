@@ -14,15 +14,13 @@ Usage: python smoke_test.py [--question-index N] [--verbose]
 """
 import argparse
 import json
-import logging
 import os
+import re
 import sys
 import time
 from pathlib import Path
 
 os.environ.setdefault("VERBOSE", "1")
-logging.basicConfig(level=logging.DEBUG, format="[%(asctime)s] %(message)s", datefmt="%H:%M:%S")
-log = logging.getLogger("smoke_test")
 
 
 def main():
@@ -31,49 +29,48 @@ def main():
                         help="Index into the test set (0-1272). Default 10.")
     args = parser.parse_args()
 
-    # --- Step 1: Load the graph ---
+    # --- Step 1: Load the graph (uses existing cache, no LLM calls) ---
     import config
     from data.kg_builder import load_or_build
     from data.medqa_loader import load_test, load_train
-    from graph.kg_store import KnowledgeGraph
     from retrieval import hybrid_retrieve
     from llm_client import LLMClient
     from evaluate import FewShotBank
     import prompts
 
-    log("Loading graph...")
+    print("Loading graph...")
     t0 = time.time()
     kg = load_or_build()
-    log("Graph loaded in %.1fs: %d nodes", time.time() - t0, len(kg.all_triples()))
+    triples_count = sum(len(v) for v in kg._edges.values())
+    print(f"  Graph loaded in {time.time()-t0:.1f}s: {len(kg._edges)} nodes, {triples_count} triples")
 
     # --- Step 2: Pick a question ---
     test = load_test()
     q = test[args.question_index]
-    log("Question #%d: %s", args.question_index, q["question"][:120])
-    log("Gold answer: %s", q["answer"])
-    log("Options:")
+    print(f"\nQuestion #{args.question_index}: {q['question'][:120]}")
+    print(f"Gold answer: {q['answer']}")
     for k, v in q["options"].items():
-        log("  %s: %s", k, v[:80])
+        print(f"  {k}: {v[:80]}")
 
-    # --- Step 3: Retrieval ---
+    # --- Step 3: Retrieval (1 LLM call for global + 1 for local) ---
     llm = LLMClient()
-    log("Running hybrid retrieval...")
+    print("\nRunning hybrid retrieval...")
     t1 = time.time()
     triples = hybrid_retrieve(llm, kg, q["question"])
-    log("Retrieved %d triples in %.1fs", len(triples), time.time() - t1)
+    print(f"  Retrieved {len(triples)} triples in {time.time()-t1:.1f}s")
     if triples:
-        log("Top 5 triples:")
+        print("  Top triples:")
         for s, p, o in triples[:5]:
-            log("  (%s, %s, %s)", s, p, o)
+            print(f"    ({s}, {p}, {o})")
 
-    # --- Step 4: Few-shot retrieval ---
-    log("Building few-shot bank...")
+    # --- Step 4: Few-shot retrieval (instant, from cache) ---
+    print("\nRetrieving few-shot examples...")
     t2 = time.time()
     fewshot = FewShotBank(load_train())
     examples = fewshot.retrieve(q["question"])
-    log("Selected %d few-shot examples in %.1fs", len(examples), time.time() - t2)
+    print(f"  Selected {len(examples)} examples in {time.time()-t2:.1f}s")
     for i, ex in enumerate(examples):
-        log("  Example %d (answer %s): %s", i + 1, ex["answer"], ex["question"][:80])
+        print(f"    Example {i+1} (answer {ex['answer']}): {ex['question'][:80]}")
 
     # --- Step 5: Build the prompt ---
     kg_context = prompts.build_kg_context(triples)
@@ -83,29 +80,27 @@ def main():
         question=q["question"],
         options=prompts.format_options(q["options"]),
     )
-    log("Prompt length: %d chars", len(prompt))
+    print(f"\nPrompt: {len(prompt)} chars")
+    print(f"Prompt preview (first 300): {prompt[:300]}")
 
     # --- Step 6: LLM call ---
-    log("Calling LLM (model=%s)...", config.OPENROUTER_MODEL)
+    print(f"\nCalling LLM ({config.OPENROUTER_MODEL})...")
     t3 = time.time()
     try:
         response = llm.chat(
             prompts.MEDSUMGRAPH_SYSTEM, prompt, temperature=0.5
         )
         elapsed = time.time() - t3
-        log("LLM response (%.1fs):", elapsed)
-        log("  %s", response[:500])
+        print(f"\nLLM response ({elapsed:.1f}s):")
+        print(f"  {response[:500]}")
     except Exception as e:
-        log("LLM ERROR: %s", e)
+        print(f"\nLLM ERROR: {e}")
         sys.exit(1)
 
     # --- Step 7: Extract answer ---
-    import re
     m = re.search(r"\b([A-D])\b", response)
     predicted = m.group(1) if m else "NONE"
-    log("Predicted answer: %s | Gold: %s | %s",
-        predicted, q["answer"],
-        "CORRECT" if predicted == q["answer"] else "WRONG")
+    print(f"\nPredicted: {predicted} | Gold: {q['answer']} | {'CORRECT' if predicted == q['answer'] else 'WRONG'}")
 
 
 if __name__ == "__main__":

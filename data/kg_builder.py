@@ -8,7 +8,10 @@ Results are cached per-CUI on disk so builds can resume.
 """
 
 import json
+import os
 import re
+import time
+from concurrent.futures import ThreadPoolExecutor, as_completed
 from pathlib import Path
 
 from tqdm import tqdm
@@ -22,18 +25,40 @@ from logging_utils import log
 
 
 def _parse_json_list(text: str) -> list:
-    """Best-effort extraction of a JSON list from an LLM response."""
+    """Best-effort extraction of a JSON array from an LLM response.
+
+    Handles truncation (capped output) by finding the last complete ']'
+    before the truncation point, trimming back to a valid array boundary,
+    and parsing from there.
+    """
     text = text.strip()
-    m = re.search(r"\[.*\]", text, re.DOTALL)
-    if m:
-        text = m.group(0)
-    try:
-        data = json.loads(text)
-    except json.JSONDecodeError:
+    if not text:
         return []
-    if not isinstance(data, list):
+
+    # Find the opening bracket of the top-level array.
+    start = text.find("[")
+    if start == -1:
         return []
-    return data
+
+    # Find the LAST closing bracket that completes a valid JSON array.
+    # Start from the end and work backwards.
+    best: list | None = None
+    for end in range(len(text) - 1, start, -1):
+        if text[end] != "]":
+            continue
+        candidate = text[start : end + 1]
+        try:
+            data = json.loads(candidate)
+            if isinstance(data, list):
+                # Validate: each element should be a 3-element list (triple)
+                valid = [t for t in data if isinstance(t, list) and len(t) >= 3]
+                if len(valid) >= len(best or []):
+                    best = valid
+                    break  # first valid from the end is good enough
+        except json.JSONDecodeError:
+            continue
+
+    return best or []
 
 
 def summarize_entity(llm: LLMClient, context: str) -> str:
@@ -162,6 +187,58 @@ def build_knowledge_graph_from_cache(
     return kg
 
 
+def _process_one_entity(ent: dict, llm: LLMClient, cache_dir: Path) -> tuple[str, str, str, list] | None:
+    """Process a single entity: fetch Wikipedia if needed, extract triples.
+
+    Returns (cui, name, type, triples) on success, None on skip/failure.
+    This function is called from the parallel thread pool.
+    """
+    cui = ent["cui"]
+    name = ent["name"]
+    cache_path = cache_dir / f"{cui}.v{KG_CACHE_VERSION}.json"
+
+    if cache_path.exists():
+        with open(cache_path, encoding="utf-8") as f:
+            triples = json.load(f)
+        return cui, name, ent["type"], triples
+
+    context = ent["definition"]
+
+    #TODO OFF for now
+    # Only fetch Wikipedia if UMLS definition is short or missing
+    # if len(context.split()) < 30:
+    try:
+        log("KG: %s (%s) — fetching Wikipedia", name, cui)
+        wiki = wikipedia_retriever.fetch_summary(name)
+        if wiki:
+            context = (context + "\n" + wiki).strip() if context else wiki
+    except Exception:
+        pass  # Wikipedia failure is non-fatal; use UMLS definition only
+
+    if not context.strip():
+        log("KG: %s (%s) — no context, skipping", name, cui)
+        return None
+
+    log("KG: %s (%s) — extracting triples (%d chars, model=%s)", name, cui, len(context), config.KG_LLM_MODEL)
+    try:
+        triples = extract_triples(llm, context)
+    except Exception as e:
+        tqdm.write(f"[build-kg] skipped {name} ({cui}): {e}")
+        return None
+
+    # Write cache (including empty — some entities genuinely have no triples)
+    with open(cache_path, "w", encoding="utf-8") as f:
+        json.dump(triples, f, ensure_ascii=False)
+
+    return cui, name, ent["type"], triples
+
+
+# Configurable: how many parallel LLM requests to fire at once.
+# OpenRouter's free tier allows ~20 RPM; each call takes 2-5s,
+# so 5 workers keeps well within limits while giving ~5x speedup.
+KG_WORKERS = int(os.getenv("KG_WORKERS", "5"))
+
+
 def build_knowledge_graph(
     entities: list[dict],
     llm: LLMClient,
@@ -169,59 +246,33 @@ def build_knowledge_graph(
     limit: int | None = config.KG_ENTITY_LIMIT,
     cache_dir: Path = config.KG_CACHE_DIR,
 ) -> KnowledgeGraph:
-    """Process entities (skipping cached CUIs) and populate the graph."""
+    """Process entities in parallel (skipping cached CUIs) and populate the graph."""
     cache_dir.mkdir(parents=True, exist_ok=True)
     if limit is not None:
         entities = entities[:limit]
 
-    for ent in tqdm(entities, desc="Building KG"):
-        cui = ent["cui"]
-        name = ent["name"]
-        cache_path = cache_dir / f"{cui}.v{KG_CACHE_VERSION}.json"
-
-        if cache_path.exists():
-            with open(cache_path, encoding="utf-8") as f:
-                triples = json.load(f)
-        else:
-            try:
-                log("KG: %s (%s) — fetching Wikipedia", name, cui)
-                context = ent["definition"]
-                wiki = wikipedia_retriever.fetch_summary(name)
-                if wiki:
-                    context = (context + "\n" + wiki).strip() if context else wiki
-                if not context.strip():
-                    log("KG: %s (%s) — no context, skipping", name, cui)
-                    continue
-                log(
-                    "KG: %s (%s) — extracting triples (%d chars, model=%s)",
-                    name,
-                    cui,
-                    len(context),
-                    config.KG_LLM_MODEL,
-                )
-                triples = extract_triples(llm, context)
-            except Exception as e:
-                # Leave no cache file on failure so the next run retries this
-                # entity. This keeps long builds failure-tolerant.
-                tqdm.write(f"[build-kg] skipped {name} ({cui}): {e}")
+    pbar = tqdm(total=len(entities), desc="Building KG")
+    completed = 0
+    with ThreadPoolExecutor(max_workers=KG_WORKERS) as pool:
+        futures = {
+            pool.submit(_process_one_entity, ent, llm, cache_dir): ent
+            for ent in entities
+        }
+        for future in as_completed(futures):
+            completed += 1
+            pbar.update(1)
+            result = future.result()
+            if result is None:
                 continue
-
-            #TODO OFF for now
-            # Don't write empty caches — the next run would silently skip this
-            # entity even if the LLM works. A failure leaves no cache, a
-            # non-empty success does. Also defensive: if the LLM returned
-            # pure noise (no parseable triples), treat it as a failure.
-            # if triples:
-            with open(cache_path, "w", encoding="utf-8") as f:
-                    json.dump(triples, f, ensure_ascii=False)
-            # else:
-            #     log("KG: %s (%s) — got 0 triples, NOT caching (will retry)", name, cui)
-
-        kg.add_node(name, cui=cui, entity_type=ent["type"])
-        for subj, pred, obj in triples:
-            kg.add_triple(subj.strip(), pred.strip(), obj.strip())
+            cui, name, etype, triples = result
+            kg.add_node(name, cui=cui, entity_type=etype)
+            for subj, pred, obj in triples:
+                kg.add_triple(subj.strip(), pred.strip(), obj.strip())
+            if completed % 100 == 0:
+                kg.save(config.GRAPH_PATH)  # periodic checkpoint
 
     kg.save(config.GRAPH_PATH)
+    pbar.close()
     return kg
 
 

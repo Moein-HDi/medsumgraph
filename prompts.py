@@ -24,30 +24,20 @@ Text:
 {context}"""
 
 RELATION_SYSTEM = (
-    "You are a medical knowledge graph builder. Extract entity-relationship "
-    "triples from the summarized medical information."
+    "You are a machine that converts text to JSON triples. You do NOT explain, "
+    "reason, narrate, or comment. You output ONLY a JSON array — nothing else. "
+    "Your response must begin with '[' and end with ']'."
 )
 
-RELATION_USER = """From the medical summary below, extract all meaningful medical relationships as JSON triples:
-[["subject", "predicate", "object"], ...]
+RELATION_USER = """Convert the medical text below into triples. Output ONLY the JSON array.
 
-Rules:
-- Subjects and objects MUST be specific medical entities: named diseases,
-  drugs, symptoms, procedures, lab tests, findings, or body parts. NEVER use
-  generic words like "medications", "treatment", "patients", "None",
-  "definition", "disease", "symptoms".
-- Predicate MUST be one of: causes, treated_with, risk_factor, symptoms,
-  diagnosed_by, complication, medication, prevents, contraindicated_with,
-  associated_with, indicates, defined_as. Use nothing else.
-- Direction matters: (drug, treated_with, disease) means the drug TREATS the
-  disease. (disease, treated_with, drug) is also fine — but never both for
-  the same pair, and never (drug, treated_with, drug).
-- Only include facts that are directly stated or strongly implied by the
-  summary. Do not invent relationships.
-- Output ONLY the JSON array. If no relationships exist, output [].
+Format: [["subject", "predicate", "object"], ...]
+Predicates allowed: causes, treated_with, risk_factor, symptoms, diagnosed_by, complication, medication, prevents, contraindicated_with, associated_with, indicates, defined_as
+Subjects/objects: specific named entities only (e.g. "Ampicillin", "Pneumonia", "headache") — never generic words like "treatment", "medications", "patients".
+Each triple must have subject != object. For treated_with: (drug, treated_with, disease) not the reverse.
 
-Medical summary:
-{summary}"""
+Medical text:
+{context}"""
 
 QUESTION_SUMMARY_SYSTEM = (
     "You are a medical expert. Summarize a clinical question into the key medical entities involved."
