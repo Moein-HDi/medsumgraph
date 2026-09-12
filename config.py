@@ -14,37 +14,30 @@ load_dotenv()
 # Fully-local operation: datasets/sentence-transformers ping the Hub even
 # when everything is cached. This silences the unauthenticated-request
 # warning and prevents any network call in the local path.
-os.environ.setdefault("HF_HUB_OFFLINE", "1")
-os.environ.setdefault("HF_HUB_DISABLE_TELEMETRY", "1")
+# os.environ.setdefault("HF_HUB_OFFLINE", "1")
+# os.environ.setdefault("HF_HUB_DISABLE_TELEMETRY", "1")
 
 PROJECT_ROOT = Path(__file__).resolve().parent
 
 # ---------------------------------------------------------------------------
-# LLM (Groq primary, Liara fallback)
+# LLM (OpenRouter — single provider)
 # ---------------------------------------------------------------------------
-GROQ_API_KEY = os.getenv("GROQ_API_KEY", "")
-GROQ_MODEL = os.getenv("GROQ_MODEL", "llama-3.3-70b-versatile")
-
-# Liara (OpenAI-compatible) fallback — used when Groq keeps failing
-# (sustained rate limits etc.). Set LIARA_API_KEY (+ optionally LIARA_BASE_URL
-# and LIARA_MODEL) in .env to enable. Keep it enabled for slow bulk runs.
-LIARA_API_KEY = os.getenv("LIARA_API_KEY", "")
-# Default is a placeholder — Liara gives you a per-project base URL like
-# https://ai.liara.ir/api/<PROJECT_ID>/v1 ; set LIARA_BASE_URL in .env.
-LIARA_BASE_URL = os.getenv("LIARA_BASE_URL", "https://ai.liara.ir/api/CHANGE_ME/v1")
-LIARA_MODEL = os.getenv("LIARA_MODEL", "meta-llama/llama-3.3-70b-instruct")
-
-# Which provider to use first: "groq" or "liara". The other provider is
-# used as a fallback if the primary exhausts its retries.
-LLM_PROVIDER = os.getenv("LLM_PROVIDER", "liara").strip().lower()
-if LLM_PROVIDER not in ("groq", "liara"):
-    raise ValueError(f"LLM_PROVIDER must be 'groq' or 'liara', got {LLM_PROVIDER!r}")
+OPENROUTER_API_KEY = os.getenv("OPENROUTER_API_KEY", "")
+# Any model available on OpenRouter. Used for QA (Phase 2) and as the
+# default for Phase 1. The paper used Llama 3.1 70B; cheaper/smaller
+# models extract triples fine.
+OPENROUTER_MODEL = os.getenv("OPENROUTER_MODEL", "meta-llama/llama-3.1-70b-instruct")
+# Separate (cheaper) model for KG construction (Phase 1). Falls back to
+# OPENROUTER_MODEL if unset. Triple extraction is a simple structured task
+# — a 8B-20B model is usually enough and ~5-10x cheaper than 70B.
+KG_LLM_MODEL = os.getenv("KG_LLM_MODEL", "") or OPENROUTER_MODEL
+OPENROUTER_BASE_URL = "https://openrouter.ai/api/v1"
 
 TEMPERATURE = 0.5
 TOP_P = 0.95
 MAX_TOKENS = 512
-# Groq free tier rate limits can be hit; retry with backoff up to this many times
-LLM_MAX_RETRIES = 8
+# OpenRouter routes to many upstreams; on rate limit / 429 retry with backoff.
+LLM_MAX_RETRIES = 50
 LLM_RETRY_BASE_DELAY = 3.0
 # Per-request timeout (seconds). Without one, hung requests block the
 # pipeline indefinitely; the retry loop above recovers from timeouts.

@@ -6,6 +6,7 @@ Per entity: C_e = UMLS definition + Wikipedia summary
 
 Results are cached per-CUI on disk so builds can resume.
 """
+
 import json
 import re
 from pathlib import Path
@@ -36,21 +37,85 @@ def _parse_json_list(text: str) -> list:
 
 
 def summarize_entity(llm: LLMClient, context: str) -> str:
-    return llm.chat(prompts.SUMMARIZE_SYSTEM, prompts.SUMMARIZE_USER.format(context=context))
+    """No-op stub: we skip the LLM summarize step (option 3 optimization).
+
+    The original pipeline called an LLM to compress the raw UMLS+Wikipedia
+    text into a JSON shape before extracting triples, but that extra hop
+    isn't necessary — the triple-extraction prompt can operate on the raw
+    context directly. Returning the context unchanged preserves the
+    call signature so existing code paths work without modification.
+    """
+    return context
+
+
+def extract_triples(llm: LLMClient, context_or_summary: str) -> list[list[str]]:
+    """Extract triples from the raw medical context (UMLS definition + Wikipedia).
+
+    Skips the summarize hop and goes straight to the relation prompt. Uses
+    temperature=0 to keep the output structured and deterministic, since this
+    is a constrained JSON-generation task with no creative component.
+    """
+    resp = llm.chat(
+        prompts.RELATION_SYSTEM,
+        prompts.RELATION_USER.format(context=context_or_summary),
+        model=config.KG_LLM_MODEL,
+        temperature=0.0,
+    )
+    data = _parse_json_list(resp)
+    out = []
+    for t in data:
+        if not isinstance(t, list) or len(t) < 3:
+            continue
+        s, p, o = (_clean_token(x) for x in t[:3])
+        if not (_is_valid_entity(s) and _is_valid_entity(o)):
+            continue
+        if p.lower() not in ALLOWED_PREDICATES:
+            continue
+        if s.lower() == o.lower():
+            continue
+        if p.lower() == "treated_with" and s.lower() == o.lower():
+            continue
+        out.append([s, p, o])
+    return out
 
 
 # Predicates that are medically meaningful and safe for a QA knowledge graph.
 ALLOWED_PREDICATES = {
-    "causes", "treated_with", "risk_factor", "symptoms", "diagnosed_by",
-    "complication", "medication", "prevents", "contraindicated_with",
-    "associated_with", "indicates", "defined_as",
+    "causes",
+    "treated_with",
+    "risk_factor",
+    "symptoms",
+    "diagnosed_by",
+    "complication",
+    "medication",
+    "prevents",
+    "contraindicated_with",
+    "associated_with",
+    "indicates",
+    "defined_as",
 }
 
 # Generic tokens that are not medical entities (reject as subject/object).
 GENERIC_ENTITIES = {
-    "medications", "treatment", "treatments", "patients", "patient", "none",
-    "disease", "diseases", "symptoms", "definition", "diagnosis", "therapy",
-    "drugs", "drug", "medication", "complications", "risk factors", "n/a", "",
+    "medications",
+    "treatment",
+    "treatments",
+    "patients",
+    "patient",
+    "none",
+    "disease",
+    "diseases",
+    "symptoms",
+    "definition",
+    "diagnosis",
+    "therapy",
+    "drugs",
+    "drug",
+    "medication",
+    "complications",
+    "risk factors",
+    "n/a",
+    "",
 }
 
 
@@ -64,27 +129,6 @@ def _is_valid_entity(tok: str) -> bool:
         return False
     # must contain at least one alphabetic character
     return any(ch.isalpha() for ch in tok)
-
-
-def extract_triples(llm: LLMClient, summary: str) -> list[list[str]]:
-    resp = llm.chat(prompts.RELATION_SYSTEM, prompts.RELATION_USER.format(summary=summary))
-    data = _parse_json_list(resp)
-    out = []
-    for t in data:
-        if not isinstance(t, list) or len(t) < 3:
-            continue
-        s, p, o = (_clean_token(x) for x in t[:3])
-        if not (_is_valid_entity(s) and _is_valid_entity(o)):
-            continue
-        if p.lower() not in ALLOWED_PREDICATES:
-            continue
-        if s.lower() == o.lower():
-            continue
-        # reject the (drug, treated_with, drug) nonsense pair
-        if p.lower() == "treated_with" and s.lower() == o.lower():
-            continue
-        out.append([s, p, o])
-    return out
 
 
 # Bump this when the extraction prompts/filters change so stale cached
@@ -148,17 +192,30 @@ def build_knowledge_graph(
                 if not context.strip():
                     log("KG: %s (%s) — no context, skipping", name, cui)
                     continue
-                log("KG: %s (%s) — summarizing (%d chars)", name, cui, len(context))
-                summary = summarize_entity(llm, context)
-                log("KG: %s (%s) — extracting triples", name, cui)
-                triples = extract_triples(llm, summary)
+                log(
+                    "KG: %s (%s) — extracting triples (%d chars, model=%s)",
+                    name,
+                    cui,
+                    len(context),
+                    config.KG_LLM_MODEL,
+                )
+                triples = extract_triples(llm, context)
             except Exception as e:
                 # Leave no cache file on failure so the next run retries this
                 # entity. This keeps long builds failure-tolerant.
                 tqdm.write(f"[build-kg] skipped {name} ({cui}): {e}")
                 continue
+
+            #TODO OFF for now
+            # Don't write empty caches — the next run would silently skip this
+            # entity even if the LLM works. A failure leaves no cache, a
+            # non-empty success does. Also defensive: if the LLM returned
+            # pure noise (no parseable triples), treat it as a failure.
+            # if triples:
             with open(cache_path, "w", encoding="utf-8") as f:
-                json.dump(triples, f, ensure_ascii=False)
+                    json.dump(triples, f, ensure_ascii=False)
+            # else:
+            #     log("KG: %s (%s) — got 0 triples, NOT caching (will retry)", name, cui)
 
         kg.add_node(name, cui=cui, entity_type=ent["type"])
         for subj, pred, obj in triples:

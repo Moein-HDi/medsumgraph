@@ -16,12 +16,23 @@ from llm_client import LLMClient
 from logging_utils import log
 from retrieval import hybrid_retrieve
 
-ANSWER_RE = re.compile(r"\b([A-D])\b")
-
+FINAL_ANSWER_RE = re.compile(r"Final answer:\s*([A-D])\b", re.IGNORECASE)
+LETTER_RE = re.compile(r"\b([A-D])\b")
 
 def _answer_letter(text: str) -> str | None:
-    m = ANSWER_RE.search(text)
-    return m.group(1) if m else None
+    text = text.strip()
+    
+    # 1. Prefer explicit "Final answer: X"
+    m = FINAL_ANSWER_RE.search(text)
+    if m:
+        return m.group(1).upper()
+    
+    # 2. Fallback: last standalone A-D in the message (often closer to the conclusion)
+    matches = LETTER_RE.findall(text)
+    if matches:
+        return matches[-1].upper()  # last occurrence, not first
+    
+    return None
 
 
 class FewShotBank:
@@ -78,7 +89,11 @@ def run_question(
     votes: list[str] = []
     for i in range(config.ENSEMBLE_SIZE):
         log("Eval: %s LLM call %d/%d", q.get("id", "?"), i + 1, config.ENSEMBLE_SIZE)
+        # print(system)
+        # print(prompt)
+
         resp = llm.chat(system, prompt)
+        # print(resp)
         votes.append(_answer_letter(resp) or "")
         log("Eval: %s vote %d -> %s", q.get("id", "?"), i + 1, votes[-1])
 
