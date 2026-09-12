@@ -84,7 +84,7 @@ def extract_triples(llm: LLMClient, context_or_summary: str) -> list[list[str]]:
         prompts.RELATION_SYSTEM,
         prompts.RELATION_USER.format(context=context_or_summary),
         model=config.KG_LLM_MODEL,
-        temperature=0.0,
+        # temperature=0.0,
     )
     data = _parse_json_list(resp)
     out = []
