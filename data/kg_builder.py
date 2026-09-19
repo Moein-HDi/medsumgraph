@@ -62,15 +62,9 @@ def _parse_json_list(text: str) -> list:
 
 
 def summarize_entity(llm: LLMClient, context: str) -> str:
-    """No-op stub: we skip the LLM summarize step (option 3 optimization).
-
-    The original pipeline called an LLM to compress the raw UMLS+Wikipedia
-    text into a JSON shape before extracting triples, but that extra hop
-    isn't necessary — the triple-extraction prompt can operate on the raw
-    context directly. Returning the context unchanged preserves the
-    call signature so existing code paths work without modification.
-    """
-    return context
+    return llm.chat(
+        prompts.SUMMARIZE_SYSTEM, prompts.SUMMARIZE_USER.format(context=context)
+    )
 
 
 def extract_triples(llm: LLMClient, context_or_summary: str) -> list[list[str]]:
@@ -94,11 +88,10 @@ def extract_triples(llm: LLMClient, context_or_summary: str) -> list[list[str]]:
         s, p, o = (_clean_token(x) for x in t[:3])
         if not (_is_valid_entity(s) and _is_valid_entity(o)):
             continue
-        if p.lower() not in ALLOWED_PREDICATES:
-            continue
+        #TODO ALLOW EVERYTHING TEMPORARILY
+        # if p.lower() not in ALLOWED_PREDICATES:
+        #     continue
         if s.lower() == o.lower():
-            continue
-        if p.lower() == "treated_with" and s.lower() == o.lower():
             continue
         out.append([s, p, o])
     return out
@@ -158,7 +151,7 @@ def _is_valid_entity(tok: str) -> bool:
 
 # Bump this when the extraction prompts/filters change so stale cached
 # triples are re-extracted rather than reused.
-KG_CACHE_VERSION = 2
+KG_CACHE_VERSION = 3
 
 
 def build_knowledge_graph_from_cache(
@@ -187,7 +180,9 @@ def build_knowledge_graph_from_cache(
     return kg
 
 
-def _process_one_entity(ent: dict, llm: LLMClient, cache_dir: Path) -> tuple[str, str, str, list] | None:
+def _process_one_entity(
+    ent: dict, llm: LLMClient, cache_dir: Path
+) -> tuple[str, str, str, list] | None:
     """Process a single entity: fetch Wikipedia if needed, extract triples.
 
     Returns (cui, name, type, triples) on success, None on skip/failure.
@@ -204,14 +199,18 @@ def _process_one_entity(ent: dict, llm: LLMClient, cache_dir: Path) -> tuple[str
 
     context = ent["definition"]
 
-    #TODO OFF for now
+    # TODO OFF for now
     # Only fetch Wikipedia if UMLS definition is short or missing
     # if len(context.split()) < 30:
     try:
         log("KG: %s (%s) — fetching Wikipedia", name, cui)
         wiki = wikipedia_retriever.fetch_summary(name)
         if wiki:
-            context = (context + "\n" + wiki).strip() if context else wiki
+            context = (
+                (name + "\n" + context + "\n" + wiki).strip()
+                if context
+                else (name + "\n" + wiki).strip()
+            )
     except Exception:
         pass  # Wikipedia failure is non-fatal; use UMLS definition only
 
@@ -219,7 +218,17 @@ def _process_one_entity(ent: dict, llm: LLMClient, cache_dir: Path) -> tuple[str
         log("KG: %s (%s) — no context, skipping", name, cui)
         return None
 
-    log("KG: %s (%s) — extracting triples (%d chars, model=%s)", name, cui, len(context), config.KG_LLM_MODEL)
+    log("KG: %s (%s) — summarizing (%d chars)", name, cui, len(context))
+    summary = summarize_entity(llm, context)
+    log("KG: %s (%s) — extracting triples", name, cui)
+    triples = extract_triples(llm, summary)
+    log(
+        "KG: %s (%s) — extracting triples (%d chars, model=%s)",
+        name,
+        cui,
+        len(context),
+        config.KG_LLM_MODEL,
+    )
     try:
         triples = extract_triples(llm, context)
     except Exception as e:

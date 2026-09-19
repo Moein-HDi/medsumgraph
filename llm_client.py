@@ -36,6 +36,7 @@ class LLMClient:
             temperature=temperature,
             top_p=config.TOP_P,
             max_tokens=config.MAX_TOKENS,
+            # reasoning_effort="none"
         )
         # Guard against malformed responses: OpenRouter sometimes returns
         # choices=None or an empty list on 402/closed-account/rate-limit
