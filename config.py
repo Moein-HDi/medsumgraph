@@ -80,7 +80,7 @@ UMLS_META_DIR = os.getenv("UMLS_META_DIR", "")
 KG_ENTITY_LIMIT = None
 
 # Wikipedia summary length cap (words) before LLM summarization
-WIKIPEDIA_MAX_WORDS = 400
+WIKIPEDIA_MAX_WORDS = 1000
 
 # ---------------------------------------------------------------------------
 # KG scope / filtering

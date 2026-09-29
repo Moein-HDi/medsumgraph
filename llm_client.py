@@ -1,4 +1,5 @@
 """LLM client using OpenRouter (single provider, no fallback)."""
+
 import time
 
 from openai import OpenAI
@@ -28,7 +29,9 @@ class LLMClient:
             {"role": "user", "content": user},
         ]
 
-    def _call_once(self, system: str, user: str, temperature: float, model: str | None = None) -> str:
+    def _call_once(
+        self, system: str, user: str, temperature: float, model: str | None = None
+    ) -> str:
         chosen_model = model or self.model
         response = self.client.chat.completions.create(
             model=chosen_model,
@@ -36,7 +39,8 @@ class LLMClient:
             temperature=temperature,
             top_p=config.TOP_P,
             max_tokens=config.MAX_TOKENS,
-            # reasoning_effort="none"
+            reasoning_effort="none",
+            extra_body={"thinking": {"type": "disabled"}},
         )
         # Guard against malformed responses: OpenRouter sometimes returns
         # choices=None or an empty list on 402/closed-account/rate-limit
@@ -73,11 +77,13 @@ class LLMClient:
                     temperature=temperature,
                     top_p=config.TOP_P,
                     max_tokens=config.MAX_TOKENS,
+                    reasoning_effort="none",
+                    extra_body={"thinking": {"type": "disabled"}},
                 )
                 return response.choices[0].message.content.strip()
             except Exception as e:
                 last_error = e
-            time.sleep(config.LLM_RETRY_BASE_DELAY * (2 ** attempt))
+            time.sleep(config.LLM_RETRY_BASE_DELAY * (2**attempt))
         raise RuntimeError(
             f"LLM call failed after {config.LLM_MAX_RETRIES} attempts: {last_error}"
         )

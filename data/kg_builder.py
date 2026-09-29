@@ -88,7 +88,7 @@ def extract_triples(llm: LLMClient, context_or_summary: str) -> list[list[str]]:
         s, p, o = (_clean_token(x) for x in t[:3])
         if not (_is_valid_entity(s) and _is_valid_entity(o)):
             continue
-        #TODO ALLOW EVERYTHING TEMPORARILY
+        # TODO ALLOW EVERYTHING TEMPORARILY
         # if p.lower() not in ALLOWED_PREDICATES:
         #     continue
         if s.lower() == o.lower():
@@ -216,21 +216,22 @@ def _process_one_entity(
 
     if not context.strip():
         log("KG: %s (%s) — no context, skipping", name, cui)
+        with open(cache_path, "w", encoding="utf-8") as f:
+            json.dump([], f, ensure_ascii=False)
         return None
 
-    log("KG: %s (%s) — summarizing (%d chars)", name, cui, len(context))
-    summary = summarize_entity(llm, context)
-    log("KG: %s (%s) — extracting triples", name, cui)
-    triples = extract_triples(llm, summary)
+    # log("KG: %s (%s) — summarizing (%d chars)", name, cui, len(context))
+    # summary = summarize_entity(llm, context)
+    summary = context
     log(
         "KG: %s (%s) — extracting triples (%d chars, model=%s)",
         name,
         cui,
-        len(context),
+        len(summary),
         config.KG_LLM_MODEL,
     )
     try:
-        triples = extract_triples(llm, context)
+        triples = extract_triples(llm, summary)
     except Exception as e:
         tqdm.write(f"[build-kg] skipped {name} ({cui}): {e}")
         return None

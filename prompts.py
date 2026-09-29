@@ -29,10 +29,10 @@ RELATION_SYSTEM = (
     "Your response must begin with '[' and end with ']'."
 )
 
-RELATION_USER = """Convert the medical text below into triples. Output ONLY the JSON array.
+RELATION_USER = """Convert the medical text below into triples that are useful for answering medical questions. avoid generating triples that are not in the text. Output ONLY the JSON array.
 
 Format: [["subject", "predicate", "object"], ...]
-Predicates allowed: causes, treated_with, risk_factor, symptoms, diagnosed_by, complication, medication, prevents, contraindicated_with, associated_with, indicates, defined_as
+try using this Predicates: causes, treated_with, risk_factor, symptoms, diagnosed_by, complication, medication, prevents, contraindicated_with, associated_with, indicates, defined_as
 Subjects/objects: specific named entities only (e.g. "Ampicillin", "Pneumonia", "headache") — never generic words like "treatment", "medications", "patients".
 Each triple must have subject != object. For treated_with: (drug, treated_with, disease) not the reverse.
 

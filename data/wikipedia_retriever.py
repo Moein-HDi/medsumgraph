@@ -10,7 +10,7 @@ def _get_wiki():
     global _wiki
     if _wiki is None:
         # 'en' user agent; lang is English as in the paper
-        _wiki = wikipediaapi.Wikipedia("MedSumGraph/1.0", "en")
+        _wiki = wikipediaapi.Wikipedia(user_agent="MedSumGraph/1.0", language="en", max_retries=50)
     return _wiki
 
 
