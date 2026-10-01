@@ -2,8 +2,7 @@
 
 A reimplementation of the MedSumGraph paper — *"MedSumGraph: enhancing GraphRAG
 for medical QA with summarization and optimized prompts"* (Kim et al., Artificial
-Intelligence In Medicine 172, 2026) — using **Groq** (`llama-3.3-70b-versatile`)
-instead of a local Ollama Llama3.1-70B.
+Intelligence In Medicine 172, 2026)
 
 The system builds a medical knowledge graph (UMLS definitions + Wikipedia
 summaries → LLM summarization → LLM relation extraction), then answers medical
@@ -20,12 +19,6 @@ python -m venv .venv
 pip install -r requirements.txt
 
 copy .env.example .env          # then edit GROQ_API_KEY
-
-Optional Liara fallback: if Groq keeps failing (e.g. sustained rate limits
-during long builds), set `LIARA_API_KEY` and `LIARA_BASE_URL` in `.env` (Liara
-gives you a per-project base URL like `https://ai.liara.ir/api/<PROJECT_ID>/v1`).
-The pipeline then automatically falls back to Liara after Groq retries are
-exhausted.
 ```
 
 ## UMLS preparation
@@ -65,7 +58,7 @@ python run_pipeline.py build-kg --no-type-filter                     # skip the 
 - **`--scope medqa` (default)** — the corpus is filtered to concepts that are
   actually relevant to MedQA:
   1. Each MedQA train+test question gets its medical entities extracted by the
-     LLM (1 Groq call per question, cached per-question in
+     LLM (1 call per question, cached per-question in
      `cache/medqa_scope/<id>.json`, so extraction is resumable and
      failure-tolerant).
   2. Extracted entities are matched to UMLS CUIs via the `MRCONSO` name index.
@@ -133,13 +126,9 @@ During bring-up the following were fixed:
 - LLM requests have a 60s timeout + retry/backoff so a hung request fails
   fast instead of blocking the pipeline.
 
-A scope graph of only 22 entities (5 questions) will return
-"No relevant knowledge graph facts found" for most test questions — that is
-expected until the full `--scope medqa` build (all 2,550 questions) is done.
 
 ## Notes
 
-- Groq rate limits are handled with automatic retry/backoff.
 - MedQA train embeddings for few-shot retrieval are cached in `cache/embeddings/`.
 - The MedQA dataset is loaded from `GBaker/MedQA-USMLE-4-options-hf` on
   HuggingFace (10,178 train examples used as the few-shot bank; 1,273-question

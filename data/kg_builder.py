@@ -278,8 +278,8 @@ def build_knowledge_graph(
             kg.add_node(name, cui=cui, entity_type=etype)
             for subj, pred, obj in triples:
                 kg.add_triple(subj.strip(), pred.strip(), obj.strip())
-            if completed % 100 == 0:
-                kg.save(config.GRAPH_PATH)  # periodic checkpoint
+            # if completed % 100 == 0:
+            #     kg.save(config.GRAPH_PATH)  # periodic checkpoint
 
     kg.save(config.GRAPH_PATH)
     pbar.close()
